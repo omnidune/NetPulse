@@ -7,18 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Global Translation Variables & Helpers
     let currentLang = localStorage.getItem('lang') || 'en';
     const langNames = {
-        en: "English",
-        es: "Español",
+        bn: "বাংলা",
         de: "Deutsch",
+        en: "English",
+        gu: "ગુજરાતી",
         hi: "हिन्दी",
         ja: "日本語",
-        ta: "தமிழ்",
-        te: "తెలుగు",
         ml: "മലയാളം",
-        pa: "ਪੰਜਾਬੀ",
         mr: "मराठी",
-        gu: "ગુજરાતી",
-        bn: "বাংলা"
+        pa: "ਪੰਜਾਬੀ",
+        es: "Español",
+        ta: "தமிழ்",
+        te: "తెలుగు"
     };
 
     // Extend translations dynamically to handle formatting parameters

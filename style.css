@@ -351,6 +351,12 @@ body.light-theme .sun-icon { display: block; }
     margin-bottom: 12px;
 }
 
+.card-header-main, .panel-header-main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
 .card-title-wrapper {
     display: flex;
     align-items: center;
@@ -367,10 +373,10 @@ body.light-theme .sun-icon { display: block; }
 }
 
 .card-hint {
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     font-weight: 500;
     color: var(--text-secondary);
-    opacity: 0.5;
+    opacity: 0.6;
     letter-spacing: 0;
     margin-left: 2px;
 }
@@ -395,6 +401,7 @@ body.light-theme .sun-icon { display: block; }
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 
 .badge-cyan { background: rgba(0, 242, 254, 0.15); color: var(--accent-cyan); }

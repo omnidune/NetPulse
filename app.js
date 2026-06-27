@@ -4,6 +4,92 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Global Translation Variables & Helpers
+    let currentLang = localStorage.getItem('lang') || 'en';
+
+    // Extend translations dynamically to handle formatting parameters
+    if (window.translations) {
+        window.translations.en["check.ws.result"] = "Echo: {echo}ms (Handshake: {hand}ms)";
+        window.translations.en["check.downlink.cdn"] = "{speed} Mbps (CDN Fetch)";
+        window.translations.en["check.downlink.browser"] = "{speed} Mbps ({type})";
+        window.translations.en["check.downlink.unreported"] = "Downlink Unreported";
+        
+        window.translations.es["check.ws.result"] = "Eco: {echo}ms (Conexión: {hand}ms)";
+        window.translations.es["check.downlink.cdn"] = "{speed} Mbps (Descarga CDN)";
+        window.translations.es["check.downlink.browser"] = "{speed} Mbps ({type})";
+        window.translations.es["check.downlink.unreported"] = "Velocidad no reportada";
+        
+        window.translations.de["check.ws.result"] = "Echo: {echo}ms (Handshake: {hand}ms)";
+        window.translations.de["check.downlink.cdn"] = "{speed} Mbps (CDN-Abruf)";
+        window.translations.de["check.downlink.browser"] = "{speed} Mbps ({type})";
+        window.translations.de["check.downlink.unreported"] = "Geschwindigkeit nicht gemeldet";
+        
+        window.translations.hi["check.ws.result"] = "इको: {echo}ms (हैंडशेक: {hand}ms)";
+        window.translations.hi["check.downlink.cdn"] = "{speed} Mbps (CDN फ़ेच)";
+        window.translations.hi["check.downlink.browser"] = "{speed} Mbps ({type})";
+        window.translations.hi["check.downlink.unreported"] = "डाउनलिंक असूचित";
+        
+        window.translations.ja["check.ws.result"] = "応答: {echo}ms (接続: {hand}ms)";
+        window.translations.ja["check.downlink.cdn"] = "{speed} Mbps (CDN取得)";
+        window.translations.ja["check.downlink.browser"] = "{speed} Mbps ({type})";
+        window.translations.ja["check.downlink.unreported"] = "下り速度取得不可";
+    }
+
+    function getTranslation(key, params = {}) {
+        if (!window.translations) return '';
+        const dict = window.translations[currentLang] || window.translations['en'];
+        let text = dict[key] || window.translations['en'][key] || '';
+        
+        Object.keys(params).forEach(p => {
+            text = text.replace(`{${p}}`, params[p]);
+        });
+        return text;
+    }
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        document.documentElement.lang = lang;
+        
+        // Sync select dropdown
+        const langSelect = document.getElementById('lang-select');
+        if (langSelect && langSelect.value !== lang) {
+            langSelect.value = lang;
+        }
+
+        // Translate annotated DOM nodes
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            const translation = getTranslation(key);
+            if (translation) {
+                if (el.tagName === 'INPUT' && el.placeholder) {
+                    el.placeholder = translation;
+                } else if (el.tagName === 'OPTION') {
+                    el.textContent = translation;
+                } else {
+                    el.textContent = translation;
+                }
+            }
+        });
+
+        // Toggle state text changes
+        if (!isTesting) {
+            if (pingData.length === 0) {
+                globalStatusText.textContent = getTranslation('status.ready');
+                verdictDesc.textContent = getTranslation('verdict.default');
+            } else {
+                updateStatistics(pingData);
+            }
+        } else {
+            if (wasPausedByVisibility) {
+                globalStatusText.textContent = getTranslation('status.paused');
+            } else {
+                globalStatusText.textContent = getTranslation('status.testing');
+            }
+        }
+    }
+
     // DOM Elements
     const themeToggleBtn = document.getElementById('theme-toggle');
     const serverSelect = document.getElementById('server-select');
@@ -557,39 +643,35 @@ document.addEventListener('DOMContentLoaded', () => {
         checkWsValue.textContent = 'Waiting...';
         checkBrowserType.className = 'check-item pending';
         checkBrowserValue.textContent = 'Waiting...';
-        checkDnsLookup.className = 'check-item pending';
-        checkDnsValue.textContent = 'Waiting...';
-    }
-
-    // Update real-time summary statistics
+        checkDnsLookup.classN    // Update real-time summary statistics
     function updateStatistics(liveData) {
         const totalAllPings = liveData.length;
 
         // Check if we are still in the warm-up phase (first 5 pings)
         if (totalAllPings <= 5) {
             statLatencyAvg.textContent = '--';
-            latencyRating.textContent = 'Calibrating';
+            latencyRating.textContent = getTranslation('rating.calibrating');
             latencyRating.className = 'badge badge-purple';
 
             statJitter.textContent = '--';
-            statJitterConsistency.textContent = 'Warming up...';
-            jitterRating.textContent = 'Calibrating';
+            statJitterConsistency.textContent = getTranslation('consistency.warming');
+            jitterRating.textContent = getTranslation('rating.calibrating');
             jitterRating.className = 'badge badge-purple';
 
             statLossPercent.textContent = '--';
             statLossCount.textContent = '0';
             statSentCount.textContent = totalAllPings;
-            lossRating.textContent = 'Calibrating';
+            lossRating.textContent = getTranslation('rating.calibrating');
             lossRating.className = 'badge badge-purple';
 
             statGrade.textContent = '--';
             statGrade.style.color = '';
-            statQualityPct.textContent = 'Calibrating...';
+            statQualityPct.textContent = getTranslation('rating.calibrating') + '...';
             scoreProgressBar.style.width = '0%';
             scoreText.textContent = '--';
             scoreText.className = 'badge';
             
-            verdictDesc.textContent = `Gathering initial connection samples (sample ${totalAllPings}/5)...`;
+            verdictDesc.textContent = getTranslation('verdict.gathering', { val: totalAllPings });
             return;
         }
 
@@ -606,13 +688,13 @@ document.addEventListener('DOMContentLoaded', () => {
         statSentCount.textContent = totalPings;
         
         if (lossPct === 0) {
-            lossRating.textContent = 'Zero Loss';
+            lossRating.textContent = getTranslation('rating.zeroloss');
             lossRating.className = 'badge badge-cyan';
         } else if (lossPct < 4) {
-            lossRating.textContent = 'Acceptable';
+            lossRating.textContent = getTranslation('rating.acceptable');
             lossRating.className = 'badge badge-purple';
         } else {
-            lossRating.textContent = 'Unstable';
+            lossRating.textContent = getTranslation('rating.unstable');
             lossRating.className = 'badge badge-red';
         }
 
@@ -635,16 +717,16 @@ document.addEventListener('DOMContentLoaded', () => {
         statLatencyMax.textContent = max;
 
         if (avg < 30) {
-            latencyRating.textContent = 'Excellent';
+            latencyRating.textContent = getTranslation('rating.excellent');
             latencyRating.className = 'badge badge-cyan';
         } else if (avg < 75) {
-            latencyRating.textContent = 'Good';
+            latencyRating.textContent = getTranslation('rating.good');
             latencyRating.className = 'badge badge-purple';
         } else if (avg < 150) {
-            latencyRating.textContent = 'Moderate';
+            latencyRating.textContent = getTranslation('rating.moderate');
             latencyRating.className = 'badge badge-gold';
         } else {
-            latencyRating.textContent = 'High Ping';
+            latencyRating.textContent = getTranslation('rating.high');
             latencyRating.className = 'badge badge-red';
         }
 
@@ -660,23 +742,23 @@ document.addEventListener('DOMContentLoaded', () => {
         statJitter.textContent = jitter;
         
         // Jitter Rating
-        let consistencyLabel = 'Stable';
+        let consistencyLabel = getTranslation('rating.good');
         if (jitter < 4) {
-            jitterRating.textContent = 'Excellent';
+            jitterRating.textContent = getTranslation('rating.excellent');
             jitterRating.className = 'badge badge-cyan';
-            consistencyLabel = 'Prisinte Stability';
+            consistencyLabel = getTranslation('consistency.pristine');
         } else if (jitter < 12) {
-            jitterRating.textContent = 'Good';
+            jitterRating.textContent = getTranslation('rating.good');
             jitterRating.className = 'badge badge-purple';
-            consistencyLabel = 'Highly Stable';
+            consistencyLabel = getTranslation('consistency.highly');
         } else if (jitter < 25) {
-            jitterRating.textContent = 'Moderate';
+            jitterRating.textContent = getTranslation('rating.moderate');
             jitterRating.className = 'badge badge-gold';
-            consistencyLabel = 'Variable Jitter';
+            consistencyLabel = getTranslation('consistency.variable');
         } else {
-            jitterRating.textContent = 'Poor';
+            jitterRating.textContent = getTranslation('rating.poor');
             jitterRating.className = 'badge badge-red';
-            consistencyLabel = 'High Fluctuations';
+            consistencyLabel = getTranslation('consistency.high');
         }
         statJitterConsistency.textContent = consistencyLabel;
 
@@ -691,7 +773,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Aggregate Score (Weighting: 40% Latency, 30% Jitter, 30% Loss)
         const finalScore = Math.round((scoreLatency * 0.4) + (scoreJitter * 0.3) + (scoreLoss * 0.3));
         
-        statQualityPct.textContent = `${finalScore}% Score`;
+        statQualityPct.textContent = `${finalScore}% ` + getTranslation('sub.pct');
         scoreProgressBar.style.width = `${finalScore}%`;
 
         // Calculate Grade Letters
@@ -700,11 +782,36 @@ document.addEventListener('DOMContentLoaded', () => {
         let scoreRating = 'POOR';
         let scoreRatingClass = 'badge badge-red';
 
-        if (finalScore >= 95) { grade = 'A+'; gradeColor = 'var(--accent-cyan)'; scoreRating = 'PRISTINE'; scoreRatingClass = 'badge badge-cyan'; }
-        else if (finalScore >= 85) { grade = 'A'; gradeColor = 'var(--status-success)'; scoreRating = 'EXCELLENT'; scoreRatingClass = 'badge badge-cyan'; }
-        else if (finalScore >= 72) { grade = 'B'; gradeColor = 'var(--status-success)'; scoreRating = 'GOOD'; scoreRatingClass = 'badge badge-purple'; }
-        else if (finalScore >= 55) { grade = 'C'; gradeColor = 'var(--status-warning)'; scoreRating = 'FAIR'; scoreRatingClass = 'badge badge-gold'; }
-        else if (finalScore >= 40) { grade = 'D'; gradeColor = 'var(--status-warning)'; scoreRating = 'POOR'; scoreRatingClass = 'badge badge-gold'; }
+        if (finalScore >= 95) { 
+            grade = 'A+'; 
+            gradeColor = 'var(--accent-cyan)'; 
+            scoreRating = getTranslation('rating.pristine').toUpperCase(); 
+            scoreRatingClass = 'badge badge-cyan'; 
+        }
+        else if (finalScore >= 85) { 
+            grade = 'A'; 
+            gradeColor = 'var(--status-success)'; 
+            scoreRating = getTranslation('rating.excellent').toUpperCase(); 
+            scoreRatingClass = 'badge badge-cyan'; 
+        }
+        else if (finalScore >= 72) { 
+            grade = 'B'; 
+            gradeColor = 'var(--status-success)'; 
+            scoreRating = getTranslation('rating.good').toUpperCase(); 
+            scoreRatingClass = 'badge badge-purple'; 
+        }
+        else if (finalScore >= 55) { 
+            grade = 'C'; 
+            gradeColor = 'var(--status-warning)'; 
+            scoreRating = getTranslation('rating.fair').toUpperCase(); 
+            scoreRatingClass = 'badge badge-gold'; 
+        }
+        else if (finalScore >= 40) { 
+            grade = 'D'; 
+            gradeColor = 'var(--status-warning)'; 
+            scoreRating = getTranslation('rating.poor').toUpperCase(); 
+            scoreRatingClass = 'badge badge-gold'; 
+        }
         
         statGrade.textContent = grade;
         statGrade.style.color = gradeColor;
@@ -714,14 +821,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Build Connection Verdict paragraph
         let verdict = '';
         if (grade.startsWith('A')) {
-            verdict = `Your network parameters are outstanding (average ping ${avg}ms, jitter ${jitter}ms). The connection is highly responsive and perfectly stable. Optimal for cloud gaming, real-time multiplayer, high-bitrate streaming, and high-frequency trading.`;
+            verdict = getTranslation('verdict.excellent', { avg, jitter });
         } else if (grade === 'B') {
-            verdict = `Your connection is stable and responsive (average ping ${avg}ms, jitter ${jitter}ms). Excellent for video streaming, casual gaming, and multi-party video conferencing. Minor delays may occur during heavy load.`;
+            verdict = getTranslation('verdict.good', { avg, jitter });
         } else if (grade === 'C') {
-            verdict = `Your connection is fair (average ping ${avg}ms). OK for basic tasks such as social media, emails, and browsing. You might experience buffering under HD streaming or slight latency anomalies in online games.`;
+            verdict = getTranslation('verdict.fair', { avg });
         } else {
-            verdict = `Critical connection stability alert. High average ping (${avg}ms) or packet loss (${lossPct}%) detected. Real-time tasks like voice calls or multiplayer gaming will suffer from heavy lag, disconnects, or stutter. Recommendation: Try switching to a wired connection (Ethernet), restart your modem, or consult your service provider.`;
-        }
+            verdict = getTranslation('verdict.poor', { avg, loss: lossPct });
         verdictDesc.textContent = verdict;
     }
 
@@ -740,10 +846,10 @@ document.addEventListener('DOMContentLoaded', () => {
         pingIntervalSelect.disabled = true;
 
         startTestBtn.classList.add('testing');
-        startTestBtn.querySelector('.btn-text').textContent = 'Stop Diagnostics';
+        startTestBtn.querySelector('.btn-text').textContent = getTranslation('controls.stop');
         globalStatusDot.className = 'status-dot yellow';
-        globalStatusText.textContent = 'Testing Network...';
-        chartConnectionStatus.textContent = 'Testing';
+        globalStatusText.textContent = getTranslation('status.testing');
+        chartConnectionStatus.textContent = getTranslation('cdn.testing');
         chartConnectionStatus.style.background = 'rgba(255, 179, 0, 0.1)';
         chartConnectionStatus.style.color = 'var(--status-warning)';
 
@@ -857,11 +963,11 @@ document.addEventListener('DOMContentLoaded', () => {
         pingIntervalSelect.disabled = false;
 
         startTestBtn.classList.remove('testing');
-        startTestBtn.querySelector('.btn-text').textContent = 'Start Network Diagnostic';
+        startTestBtn.querySelector('.btn-text').textContent = getTranslation('controls.start');
         
         globalStatusDot.className = 'status-dot gray';
-        globalStatusText.textContent = 'Diagnostics Interrupted';
-        chartConnectionStatus.textContent = 'Stopped';
+        globalStatusText.textContent = getTranslation('status.interrupted');
+        chartConnectionStatus.textContent = getTranslation('status.interrupted');
         chartConnectionStatus.style.background = '';
         chartConnectionStatus.style.color = '';
         updatePulseAnimation(0, false);
@@ -878,11 +984,11 @@ document.addEventListener('DOMContentLoaded', () => {
         pingIntervalSelect.disabled = false;
 
         startTestBtn.classList.remove('testing');
-        startTestBtn.querySelector('.btn-text').textContent = 'Start Network Diagnostic';
+        startTestBtn.querySelector('.btn-text').textContent = getTranslation('controls.start');
         
         globalStatusDot.className = 'status-dot green';
-        globalStatusText.textContent = 'Diagnostics Finished';
-        chartConnectionStatus.textContent = 'Online';
+        globalStatusText.textContent = getTranslation('status.finished');
+        chartConnectionStatus.textContent = getTranslation('status.ready');
         chartConnectionStatus.style.background = '';
         chartConnectionStatus.style.color = '';
         updatePulseAnimation(0, false);
@@ -906,7 +1012,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check browser downlink capability using Navigator connection object
     function runBrowserDownlinkCheck() {
         checkBrowserType.className = 'check-item loading';
-        checkBrowserValue.textContent = 'Calculating...';
+        checkBrowserValue.textContent = getTranslation('check.calculating');
 
         setTimeout(async () => {
             const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
@@ -932,13 +1038,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (speedMbps !== null) {
-                downloadText = `${speedMbps.toFixed(1)} Mbps (CDN Fetch)`;
+                downloadText = getTranslation('check.downlink.cdn', { speed: speedMbps.toFixed(1) });
                 successState = 'success';
             } else if (conn && conn.downlink) {
-                downloadText = `${conn.downlink} Mbps (${conn.effectiveType || '4G'})`;
+                downloadText = getTranslation('check.downlink.browser', { speed: conn.downlink, type: conn.effectiveType || '4G' });
                 successState = 'success';
             } else {
-                downloadText = 'Downlink Unreported';
+                downloadText = getTranslation('check.downlink.unreported');
                 successState = 'warning';
             }
 
@@ -950,7 +1056,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // WebSocket Diagnostic
     function runWebSocketTest() {
         checkWebsockets.className = 'check-item loading';
-        checkWsValue.textContent = 'Connecting...';
+        checkWsValue.textContent = getTranslation('check.connecting');
 
         // Connect to a public test socket server
         const wsUrl = 'wss://echo.websocket.events';
@@ -961,14 +1067,14 @@ document.addEventListener('DOMContentLoaded', () => {
             socket = new WebSocket(wsUrl);
         } catch (e) {
             checkWebsockets.className = 'check-item danger';
-            checkWsValue.textContent = 'Failed';
+            checkWsValue.textContent = getTranslation('check.failed');
             return;
         }
 
         const wsTimeoutId = setTimeout(() => {
             socket.close();
             checkWebsockets.className = 'check-item warning';
-            checkWsValue.textContent = 'Timed Out';
+            checkWsValue.textContent = getTranslation('check.timeout');
         }, 5000);
 
         socket.onopen = () => {
@@ -984,7 +1090,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 socket.close();
 
                 checkWebsockets.className = 'check-item success';
-                checkWsValue.textContent = `Echo: ${echoTime}ms (Handshake: ${handshakeTime}ms)`;
+                checkWsValue.textContent = getTranslation('check.ws.result', { echo: echoTime, hand: handshakeTime });
             };
         };
 
@@ -992,14 +1098,14 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(wsTimeoutId);
             socket.close();
             checkWebsockets.className = 'check-item danger';
-            checkWsValue.textContent = 'Blocked or Unreachable';
+            checkWsValue.textContent = getTranslation('check.blocked');
         };
     }
 
     // Run parallel DNS Comparison to check CDN providers responsiveness
     async function runCdnComparison() {
         btnRunCdn.disabled = true;
-        btnRunCdn.textContent = 'Testing...';
+        btnRunCdn.textContent = getTranslation('cdn.testing');
 
         const endpoints = [
             { id: 'cloudflare', name: 'Cloudflare Edge', url: 'https://cloudflare.com/cdn-cgi/trace' },
@@ -1009,7 +1115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         checkDnsLookup.className = 'check-item loading';
-        checkDnsValue.textContent = 'Testing nodes...';
+        checkDnsValue.textContent = getTranslation('check.testing');
 
         // Ping nodes in parallel, averages of 3 runs for each
         const results = await Promise.all(endpoints.map(async (endpoint) => {
@@ -1041,14 +1147,14 @@ document.addEventListener('DOMContentLoaded', () => {
             validResults.sort((a, b) => a.latency - b.latency);
             const bestNode = validResults[0];
             checkDnsLookup.className = 'check-item success';
-            checkDnsValue.textContent = `${bestNode.name} is fastest (${bestNode.latency}ms)`;
+            checkDnsValue.textContent = getTranslation('check.dns.result', { node: bestNode.name, ms: bestNode.latency });
         } else {
             checkDnsLookup.className = 'check-item danger';
-            checkDnsValue.textContent = 'All Nodes Failed';
+            checkDnsValue.textContent = getTranslation('check.dns.failed');
         }
 
         btnRunCdn.disabled = false;
-        btnRunCdn.textContent = 'Test Nodes';
+        btnRunCdn.textContent = getTranslation('cdn.test');
     }
 
     // Render comparison list bars
@@ -1164,7 +1270,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentHistory.length === 0) {
             const emptyRow = document.createElement('tr');
             emptyRow.className = 'empty-state-row';
-            emptyRow.innerHTML = `<td colspan="6" class="text-center">No runs recorded yet. Start a test to compile history.</td>`;
+            emptyRow.innerHTML = `<td colspan="6" class="text-center" data-i18n="history.empty">${getTranslation('history.empty')}</td>`;
             historyTbody.appendChild(emptyRow);
             return;
         }
@@ -1235,11 +1341,11 @@ document.addEventListener('DOMContentLoaded', () => {
         pingIntervalSelect.disabled = false;
 
         startTestBtn.classList.remove('testing');
-        startTestBtn.querySelector('.btn-text').textContent = 'Start Network Diagnostic';
+        startTestBtn.querySelector('.btn-text').textContent = getTranslation('controls.start');
         
         globalStatusDot.className = 'status-dot yellow';
-        globalStatusText.textContent = 'Continuous Test Auto-Paused';
-        chartConnectionStatus.textContent = 'Auto-Paused';
+        globalStatusText.textContent = getTranslation('status.autopaused');
+        chartConnectionStatus.textContent = getTranslation('status.autopaused');
         chartConnectionStatus.style.background = '';
         chartConnectionStatus.style.color = '';
         updatePulseAnimation(0, false);
@@ -1262,8 +1368,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearTimeout(testIntervalId);
                 
                 globalStatusDot.className = 'status-dot yellow';
-                globalStatusText.textContent = 'Diagnostics Paused (Background)';
-                chartConnectionStatus.textContent = 'Paused';
+                globalStatusText.textContent = getTranslation('status.paused');
+                chartConnectionStatus.textContent = getTranslation('status.paused');
                 chartConnectionStatus.style.background = 'rgba(255, 179, 0, 0.1)';
                 chartConnectionStatus.style.color = 'var(--status-warning)';
                 updatePulseAnimation(0, false);
@@ -1272,8 +1378,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (wasPausedByVisibility) {
                 wasPausedByVisibility = false;
                 globalStatusDot.className = 'status-dot yellow';
-                globalStatusText.textContent = 'Resuming Diagnostics...';
-                chartConnectionStatus.textContent = 'Testing';
+                globalStatusText.textContent = getTranslation('status.resuming');
+                chartConnectionStatus.textContent = getTranslation('cdn.testing');
                 chartConnectionStatus.style.background = 'rgba(255, 179, 0, 0.1)';
                 chartConnectionStatus.style.color = 'var(--status-warning)';
                 
@@ -1285,6 +1391,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // Sync language select dropdown change listener
+    const langSelect = document.getElementById('lang-select');
+    if (langSelect) {
+        langSelect.addEventListener('change', (e) => {
+            setLanguage(e.target.value);
+        });
+    }
+
+    // Set initial language from local storage preference or browser default
+    setLanguage(currentLang);
 
     // Run-once initial setups
     renderHistoryTable();

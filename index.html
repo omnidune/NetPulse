@@ -28,9 +28,18 @@
             </div>
             <div class="status-indicator-bar">
                 <span class="status-dot green" id="global-status-dot"></span>
-                <span id="global-status-text" class="status-text">Ready to Test</span>
+                <span id="global-status-text" class="status-text" data-i18n="status.ready">Ready to Test</span>
             </div>
             <div class="header-controls">
+                <div class="language-wrapper">
+                    <select id="lang-select" class="lang-select" aria-label="Select Language">
+                        <option value="en" selected>EN</option>
+                        <option value="es">ES</option>
+                        <option value="de">DE</option>
+                        <option value="hi">HI</option>
+                        <option value="ja">JA</option>
+                    </select>
+                </div>
                 <button id="theme-toggle" class="icon-button" aria-label="Toggle Theme">
                     <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="4"/>
@@ -56,9 +65,9 @@
                                 <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
                             </svg>
                         </div>
-                        <h3>Latency (RTT)</h3>
+                        <h3 data-i18n="metrics.latency">Latency (RTT)</h3>
                     </div>
-                    <span class="badge badge-cyan" id="latency-rating">--</span>
+                    <span class="badge badge-cyan" id="latency-rating" data-i18n="rating.calibrating">--</span>
                 </div>
                 <div class="card-body">
                     <div class="main-metric">
@@ -67,11 +76,11 @@
                     </div>
                     <div class="sub-metrics">
                         <div class="sub-metric">
-                            <span class="sub-label">Min</span>
+                            <span class="sub-label" data-i18n="sub.min">Min</span>
                             <span id="stat-latency-min" class="sub-value">--</span>
                         </div>
                         <div class="sub-metric border-left">
-                            <span class="sub-label">Max</span>
+                            <span class="sub-label" data-i18n="sub.max">Max</span>
                             <span id="stat-latency-max" class="sub-value">--</span>
                         </div>
                     </div>
@@ -87,9 +96,9 @@
                                 <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
                             </svg>
                         </div>
-                        <h3>Jitter</h3>
+                        <h3 data-i18n="metrics.jitter">Jitter</h3>
                     </div>
-                    <span class="badge badge-purple" id="jitter-rating">--</span>
+                    <span class="badge badge-purple" id="jitter-rating" data-i18n="rating.calibrating">--</span>
                 </div>
                 <div class="card-body">
                     <div class="main-metric">
@@ -98,7 +107,7 @@
                     </div>
                     <div class="sub-metrics">
                         <div class="sub-metric">
-                            <span class="sub-label">Consistency</span>
+                            <span class="sub-label" data-i18n="sub.consistency">Consistency</span>
                             <span id="stat-jitter-consistency" class="sub-value">--</span>
                         </div>
                     </div>
@@ -116,9 +125,9 @@
                                 <line x1="12" y1="17" x2="12.01" y2="17"/>
                             </svg>
                         </div>
-                        <h3>Packet Loss</h3>
+                        <h3 data-i18n="metrics.loss">Packet Loss</h3>
                     </div>
-                    <span class="badge badge-red" id="loss-rating">--</span>
+                    <span class="badge badge-red" id="loss-rating" data-i18n="rating.calibrating">--</span>
                 </div>
                 <div class="card-body">
                     <div class="main-metric">
@@ -127,11 +136,11 @@
                     </div>
                     <div class="sub-metrics">
                         <div class="sub-metric">
-                            <span class="sub-label">Packets Lost</span>
+                            <span class="sub-label" data-i18n="sub.lost">Packets Lost</span>
                             <span id="stat-loss-count" class="sub-value">--</span>
                         </div>
                         <div class="sub-metric border-left">
-                            <span class="sub-label">Total Sent</span>
+                            <span class="sub-label" data-i18n="sub.sent">Total Sent</span>
                             <span id="stat-sent-count" class="sub-value">--</span>
                         </div>
                     </div>
@@ -147,7 +156,7 @@
                                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                             </svg>
                         </div>
-                        <h3>Quality Grade</h3>
+                        <h3 data-i18n="metrics.grade">Quality Grade</h3>
                     </div>
                     <span class="badge badge-gold" id="score-text">--</span>
                 </div>
@@ -187,7 +196,7 @@
                                 <circle class="gauge-fill" id="gauge-progress" cx="110" cy="110" r="95" stroke-width="10" fill="none" stroke-dasharray="596.9" stroke-dashoffset="596.9"/>
                             </svg>
                             <div class="gauge-content">
-                                <span class="gauge-label">CURRENT PING</span>
+                                <span class="gauge-label" data-i18n="gauge.label">CURRENT PING</span>
                                 <span class="gauge-value" id="current-ping-display">0</span>
                                 <span class="gauge-unit">ms</span>
                             </div>
@@ -197,7 +206,7 @@
 
                 <div class="controls-form">
                     <div class="input-group">
-                        <label for="server-select">Diagnostic Server</label>
+                        <label for="server-select" data-i18n="controls.server">Diagnostic Server</label>
                         <select id="server-select" class="form-select">
                             <option value="https://cloudflare.com/cdn-cgi/trace">Cloudflare (Global CDN)</option>
                             <option value="https://dns.google">Google DNS</option>
@@ -208,34 +217,34 @@
                     </div>
 
                     <div id="custom-server-wrapper" class="input-group hidden">
-                        <label for="custom-server-input">Custom HTTPS URL</label>
+                        <label for="custom-server-input" data-i18n="controls.custom">Custom HTTPS URL</label>
                         <input type="url" id="custom-server-input" class="form-input" placeholder="https://example.com/api/ping" value="https://">
-                        <span class="helper-text">Requires HTTPS. Standard fetch (no-cors) is used.</span>
+                        <span class="helper-text" data-i18n="controls.helper">Requires HTTPS. Standard fetch (no-cors) is used.</span>
                     </div>
 
                     <div class="parameters-grid">
                         <div class="input-group">
-                            <label for="test-duration">Duration</label>
+                            <label for="test-duration" data-i18n="controls.duration">Duration</label>
                             <select id="test-duration" class="form-select">
-                                <option value="15">Short (15s)</option>
-                                <option value="30">Standard (30s)</option>
-                                <option value="60">Extended (60s)</option>
-                                <option value="continuous" selected>Continuous (Default)</option>
+                                <option value="15" data-i18n="controls.short">Short (15s)</option>
+                                <option value="30" data-i18n="controls.standard">Standard (30s)</option>
+                                <option value="60" data-i18n="controls.extended">Extended (60s)</option>
+                                <option value="continuous" selected data-i18n="controls.continuous">Continuous (Default)</option>
                             </select>
                         </div>
                         <div class="input-group">
-                            <label for="ping-interval">Interval</label>
+                            <label for="ping-interval" data-i18n="controls.interval">Interval</label>
                             <select id="ping-interval" class="form-select">
-                                <option value="200">Fast (200ms)</option>
-                                <option value="500" selected>Medium (500ms)</option>
-                                <option value="1000">Slow (1000ms)</option>
+                                <option value="200" data-i18n="controls.fast">Fast (200ms)</option>
+                                <option value="500" selected data-i18n="controls.medium">Medium (500ms)</option>
+                                <option value="1000" data-i18n="controls.slow">Slow (1000ms)</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="action-buttons">
                         <button id="btn-start-test" class="btn btn-primary">
-                            <span class="btn-text">Start Network Diagnostic</span>
+                            <span class="btn-text" data-i18n="controls.start">Start Network Diagnostic</span>
                             <span class="btn-glow"></span>
                         </button>
                     </div>
@@ -253,7 +262,7 @@
                                 <line x1="3" y1="9" x2="21" y2="9"/>
                                 <line x1="9" y1="21" x2="9" y2="9"/>
                             </svg>
-                            <h2>Real-time Latency Graph</h2>
+                            <h2 data-i18n="chart.title">Real-time Latency Graph</h2>
                         </div>
                         <span class="chart-status" id="chart-connection-status">Online</span>
                     </div>
@@ -261,8 +270,8 @@
                         <canvas id="latency-chart"></canvas>
                     </div>
                     <div class="chart-footer">
-                        <span class="chart-legend"><span class="legend-color cyan"></span> Ping RTT (ms)</span>
-                        <span class="chart-legend"><span class="legend-color red-dashed"></span> Packet Timeout Limit (1.5s)</span>
+                        <span class="chart-legend"><span class="legend-color cyan"></span> <span data-i18n="chart.legend.ping">Ping RTT (ms)</span></span>
+                        <span class="chart-legend"><span class="legend-color red-dashed"></span> <span data-i18n="chart.legend.limit">Packet Timeout Limit (1.5s)</span></span>
                     </div>
                 </section>
 
@@ -274,27 +283,27 @@
                                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                                 <polyline points="22 4 12 14.01 9 11.01"/>
                             </svg>
-                            <h2>Connection Quality Assessment</h2>
+                            <h2 data-i18n="check.title">Connection Quality Assessment</h2>
                         </div>
                     </div>
                     <div class="verdict-body">
-                        <p class="verdict-summary" id="verdict-desc">Please complete a network diagnostic run to receive a tailored connection summary.</p>
+                        <p class="verdict-summary" id="verdict-desc" data-i18n="verdict.default">Please complete a network diagnostic run to receive a tailored connection summary.</p>
                         
                         <div class="diagnostics-checklist">
                             <div class="check-item pending" id="check-websockets">
                                 <span class="check-icon"></span>
-                                <span class="check-label">WebSocket Capability & Latency</span>
-                                <span class="check-value" id="check-ws-value">Waiting...</span>
+                                <span class="check-label" data-i18n="check.ws">WebSocket Capability & Latency</span>
+                                <span class="check-value" id="check-ws-value" data-i18n="check.waiting">Waiting...</span>
                             </div>
                             <div class="check-item pending" id="check-browsertype">
                                 <span class="check-icon"></span>
-                                <span class="check-label">Browser Downlink Estimate</span>
-                                <span class="check-value" id="check-browser-value">Waiting...</span>
+                                <span class="check-label" data-i18n="check.downlink">Browser Downlink Estimate</span>
+                                <span class="check-value" id="check-browser-value" data-i18n="check.waiting">Waiting...</span>
                             </div>
                             <div class="check-item pending" id="check-dns-lookup">
                                 <span class="check-icon"></span>
-                                <span class="check-label">Multi-Node DNS Comparison</span>
-                                <span class="check-value" id="check-dns-value">Waiting...</span>
+                                <span class="check-label" data-i18n="check.dns">Multi-Node DNS Comparison</span>
+                                <span class="check-value" id="check-dns-value" data-i18n="check.waiting">Waiting...</span>
                             </div>
                         </div>
                     </div>
@@ -312,9 +321,9 @@
                             <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
                             <line x1="4" y1="22" x2="4" y2="15"/>
                         </svg>
-                        <h2>CDN Edge Node Comparison</h2>
+                        <h2 data-i18n="cdn.title">CDN Edge Node Comparison</h2>
                     </div>
-                    <button class="btn btn-sm btn-secondary" id="btn-run-cdn-comparison">Test Nodes</button>
+                    <button class="btn btn-sm btn-secondary" id="btn-run-cdn-comparison" data-i18n="cdn.test">Test Nodes</button>
                 </div>
                 <div class="nodes-list" id="nodes-comparison-list">
                     <div class="node-item">
@@ -357,26 +366,26 @@
                             <polyline points="12 6 12 12 16 14"/>
                             <path d="M12 2a10 10 0 0 0-9.9 9H2"/>
                         </svg>
-                        <h2>Diagnostic Run History</h2>
+                        <h2 data-i18n="history.title">Diagnostic Run History</h2>
                     </div>
-                    <button class="btn btn-sm btn-text" id="btn-clear-history">Clear</button>
+                    <button class="btn btn-sm btn-text" id="btn-clear-history" data-i18n="history.clear">Clear</button>
                 </div>
                 <div class="history-table-wrapper">
                     <table class="history-table" id="history-table">
                         <thead>
                             <tr>
-                                <th>Date & Time</th>
-                                <th>Server</th>
-                                <th>Avg Latency</th>
-                                <th>Jitter</th>
-                                <th>Loss</th>
-                                <th>Grade</th>
+                                <th data-i18n="history.col.date">Date & Time</th>
+                                <th data-i18n="history.col.server">Server</th>
+                                <th data-i18n="history.col.avg">Avg Latency</th>
+                                <th data-i18n="history.col.jitter">Jitter</th>
+                                <th data-i18n="history.col.loss">Loss</th>
+                                <th data-i18n="history.col.grade">Grade</th>
                             </tr>
                         </thead>
                         <tbody id="history-tbody">
                             <!-- Injected by JS -->
                             <tr class="empty-state-row">
-                                <td colspan="6" class="text-center">No runs recorded yet. Start a test to compile history.</td>
+                                <td colspan="6" class="text-center" data-i18n="history.empty">No runs recorded yet. Start a test to compile history.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -387,9 +396,9 @@
 
     <footer class="app-footer">
         <div class="container footer-content">
-            <p>&copy; 2026 NetPulse Diagnostic Lab. Designed for ultimate precision network analysis.</p>
+            <p data-i18n="footer.text">&copy; 2026 NetPulse Diagnostic Lab. Designed for ultimate precision network analysis.</p>
             <p class="footer-links">
-                <a href="#" id="link-show-about">About Diagnostics</a>
+                <a href="#" id="link-show-about" data-i18n="footer.about">About Diagnostics</a>
             </p>
         </div>
     </footer>
@@ -398,7 +407,7 @@
     <div class="modal-overlay hidden" id="about-modal">
         <div class="modal-card">
             <div class="modal-header">
-                <h2>Understanding Network Quality</h2>
+                <h2 data-i18n="modal.title">Understanding Network Quality</h2>
                 <button class="icon-button close-modal" id="btn-close-modal">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -406,38 +415,27 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h3>Key Diagnostics Measured</h3>
+                <h3 data-i18n="modal.subtitle">Key Diagnostics Measured</h3>
                 
                 <div class="about-grid">
                     <div class="about-item">
-                        <h4>Latency (Round Trip Time)</h4>
-                        <p>The time (in milliseconds) it takes for a data packet to travel from your browser to the server and back. Lower latency yields a snappier web experience and is vital for interactive real-time applications like cloud gaming and VoIP calls.</p>
-                        <ul>
-                            <li><strong>&lt; 30 ms</strong>: Excellent. Responsive for competitive multiplayer.</li>
-                            <li><strong>30 - 80 ms</strong>: Good. Very usable for gaming & video calls.</li>
-                            <li><strong>80 - 150 ms</strong>: Fair. Mild delay, fine for streaming/browsing.</li>
-                            <li><strong>&gt; 150 ms</strong>: Poor. Noticeable lag, sluggish interactions.</li>
-                        </ul>
+                        <h4 data-i18n="modal.sub1">Latency (Round Trip Time)</h4>
+                        <p data-i18n="modal.desc1">The time (in milliseconds) it takes for a data packet to travel from your browser to the server and back. Lower latency yields a snappier web experience and is vital for interactive real-time applications like cloud gaming and VoIP calls.</p>
                     </div>
 
                     <div class="about-item">
-                        <h4>Jitter (Latency Consistency)</h4>
-                        <p>The variation in latency measurements over time. High jitter causes packet arrival ordering issues, leading to stuttering during video calls, audio buffering, or gaming rubber-banding even if your average ping is acceptable.</p>
-                        <ul>
-                            <li><strong>&lt; 5 ms</strong>: Exceptional consistency.</li>
-                            <li><strong>5 - 15 ms</strong>: Normal. Safe for streaming.</li>
-                            <li><strong>&gt; 15 ms</strong>: High Jitter. Potential degradation in real-time streams.</li>
-                        </ul>
+                        <h4 data-i18n="modal.sub2">Jitter (Latency Consistency)</h4>
+                        <p data-i18n="modal.desc2">The variation in latency measurements over time. High jitter causes packet arrival ordering issues, leading to stuttering during video calls, audio buffering, or gaming rubber-banding even if your average ping is acceptable.</p>
                     </div>
 
                     <div class="about-item">
-                        <h4>Packet Loss</h4>
-                        <p>The percentage of sent data packets that fail to reach the destination. A high packet loss forces network stacks to retry sending data, crippling connections. Packet loss above 1-2% is highly disruptive for interactive media.</p>
+                        <h4 data-i18n="modal.sub3">Packet Loss</h4>
+                        <p data-i18n="modal.desc3">The percentage of sent data packets that fail to reach the destination. A high packet loss forces network stacks to retry sending data, crippling connections. Packet loss above 1-2% is highly disruptive for interactive media.</p>
                     </div>
 
                     <div class="about-item">
-                        <h4>WebSockets vs HTTP</h4>
-                        <p>WebSockets maintain an active, full-duplex communication channel over a single TCP connection. HTTP sends discrete requests. NetPulse checks WebSocket ping times to test the responsiveness of modern chat, trading, and collaboration tools.</p>
+                        <h4 data-i18n="modal.sub4">WebSockets vs HTTP</h4>
+                        <p data-i18n="modal.desc4">WebSockets maintain an active, full-duplex communication channel over a single TCP connection. HTTP sends discrete requests. NetPulse checks WebSocket ping times to test the responsiveness of modern chat, trading, and collaboration tools.</p>
                     </div>
                 </div>
             </div>
@@ -445,6 +443,7 @@
     </div>
 
     <!-- JS Main Script -->
+    <script src="translations.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

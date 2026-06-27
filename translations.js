@@ -1252,7 +1252,7 @@ window.translations = {
         "controls.short": "সংক্ষিপ্ত (১৫ সে)",
         "controls.standard": "আদর্শ (৩০ সে)",
         "controls.extended": "বর্ধিত (৬০ সে)",
-        "controls.continuous": "सतत (ডিফল্ট)",
+        "controls.continuous": "অনবরত (ডিফল্ট)",
         "controls.fast": "দ্রুত (২০০ms)",
         "controls.medium": "মাঝারি (৫০০ms)",
         "controls.slow": "ধীর (১০০০ms)",

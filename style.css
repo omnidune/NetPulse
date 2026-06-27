@@ -440,6 +440,12 @@ body.light-theme .sun-icon { display: block; }
 .sub-value {
     font-weight: 600;
     color: var(--text-primary);
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+    vertical-align: bottom;
 }
 
 .grade-container {

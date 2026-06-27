@@ -11,7 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
         es: "Español",
         de: "Deutsch",
         hi: "हिन्दी",
-        ja: "日本語"
+        ja: "日本語",
+        ta: "தமிழ்",
+        te: "తెలుగు",
+        ml: "മലയാളം",
+        pa: "ਪੰਜਾਬੀ",
+        mr: "मराठी",
+        gu: "ગુજરાતી"
     };
 
     // Extend translations dynamically to handle formatting parameters
@@ -85,6 +91,96 @@ document.addEventListener('DOMContentLoaded', () => {
         window.translations.ja["modal.grades.c.desc"] = "Web閲覧やSNS、メール送受信向け。ゲームの遅延や動画視聴時のバッファリングがたまに発生する可能性があります。";
         window.translations.ja["modal.grades.df.title"] = "低品質 & 不安定";
         window.translations.ja["modal.grades.df.desc"] = "深刻な遅延や高確率のパケットロス。切断、強烈なラグ、音声・ビデオ通話のプツプツとした途切れが多発します。";
+        
+        // Tamil (ta)
+        window.translations.ta["check.ws.result"] = "எக்கோ: {echo}ms (இணைப்பு: {hand}ms)";
+        window.translations.ta["check.downlink.cdn"] = "{speed} Mbps (CDN பதிவிறக்கம்)";
+        window.translations.ta["check.downlink.browser"] = "{speed} Mbps ({type})";
+        window.translations.ta["check.downlink.unreported"] = "பதிவிறக்கம் அளவிடப்படவில்லை";
+        window.translations.ta["modal.grades.title"] = "இணைப்பு செயல்திறன் தரவரிசை";
+        window.translations.ta["modal.grades.a.title"] = "சிறந்த மற்றும் மிகவும் நன்று";
+        window.translations.ta["modal.grades.a.desc"] = "முழு ஸ்திரத்தன்மை மற்றும் மிகக் குறைந்த தாமதம். ஆன்லைன் கேமிங், 4K ஸ்ட்ரீமிங் மற்றும் நிகழ்நேர பயன்பாடுகளுக்கு சிறந்தது.";
+        window.translations.ta["modal.grades.b.title"] = "நல்லது மற்றும் நிலையானது";
+        window.translations.ta["modal.grades.b.desc"] = "விரைவான பதில். எச்டி வீடியோ அழைப்புகள் மற்றும் ரிமோட் அலுவலக பணிகளுக்கு சிறந்தது.";
+        window.translations.ta["modal.grades.c.title"] = "சாதாரணமானது மற்றும் ஏற்கத்தக்கது";
+        window.translations.ta["modal.grades.c.desc"] = "உலாவுதல் மற்றும் மின்னஞ்சல்களுக்கு போதுமானது. எப்போதாவது பஃபரிங் ஏற்படலாம்.";
+        window.translations.ta["modal.grades.df.title"] = "மோசமானது மற்றும் நிலையற்றது";
+        window.translations.ta["modal.grades.df.desc"] = "அதிக தாமதம் அல்லது பாக்கெட் இழப்பு. அடிக்கடி இணைப்பு துண்டிப்பு மற்றும் வீடியோ தடங்கல்கள் ஏற்படலாம்.";
+
+        // Telugu (te)
+        window.translations.te["check.ws.result"] = "ఎకో: {echo}ms (కనెక్షన్: {hand}ms)";
+        window.translations.te["check.downlink.cdn"] = "{speed} Mbps (CDN డౌన్‌లోడ్)";
+        window.translations.te["check.downlink.browser"] = "{speed} Mbps ({type})";
+        window.translations.te["check.downlink.unreported"] = "డౌన్‌లోడ్ స్పీడ్ తెలియదు";
+        window.translations.te["modal.grades.title"] = "కనెక్షన్ పనితీరు గ్రేడ్‌లు";
+        window.translations.te["modal.grades.a.title"] = "అత్యుత్తమ మరియు అద్భుతమైన";
+        window.translations.te["modal.grades.a.desc"] = "పూర్తి స్థిరత్వం మరియు చాలా తక్కువ జాప్యం. ఆన్‌లైన్ గేమింగ్, 4K స్ట్రీమింగ్ మరియు రియల్-టైమ్ యాప్స్ కొరకు ఉత్తమమైనది.";
+        window.translations.te["modal.grades.b.title"] = "మంచిది మరియు స్థిరమైనది";
+        window.translations.te["modal.grades.b.desc"] = "చాలా వేగవంతమైనది. హెచ్‌డీ వీడియో కాన్ఫరెన్స్‌లు మరియు రిమోట్ ఆఫీస్ పనులకు అద్భుతమైనది.";
+        window.translations.te["modal.grades.c.title"] = "సాధారణ మరియు ఆమోదయోగ్యమైన";
+        window.translations.te["modal.grades.c.desc"] = "బ్రౌజింగ్ మరియు ఈమెయిల్‌లకు సరిపోతుంది. కొన్నిసార్లు బఫరింగ్ సంభవించవచ్చు.";
+        window.translations.te["modal.grades.df.title"] = "బాగోలేదు మరియు అస్థిరమైన";
+        window.translations.te["modal.grades.df.desc"] = "తీవ్రమైన జాప్యం లేదా ప్యాకెట్ నష్టం. కనెక్షన్ తరచుగా డిస్‌కనెక్ట్ కావడం మరియు వీడియో అగిపోవడం జరుగుతుంది.";
+
+        // Malayalam (ml)
+        window.translations.ml["check.ws.result"] = "എക്കോ: {echo}ms (ബന്ധപ്പെടൽ: {hand}ms)";
+        window.translations.ml["check.downlink.cdn"] = "{speed} Mbps (CDN ഡൗൺലോഡ്)";
+        window.translations.ml["check.downlink.browser"] = "{speed} Mbps ({type})";
+        window.translations.ml["check.downlink.unreported"] = "വേഗത ലഭ്യമല്ല";
+        window.translations.ml["modal.grades.title"] = "കണക്ഷൻ പ്രവർത്തന നിലവാരം";
+        window.translations.ml["modal.grades.a.title"] = "അതിശ്രേഷ്ഠം & മികച്ചത്";
+        window.translations.ml["modal.grades.a.desc"] = "പൂർണ്ണ സ്ഥിരതയും വളരെ കുറഞ്ഞ ലേറ്റൻസിയും. ഓൺലൈൻ ഗെയിമിംഗ്, 4K സ്ട്രീമിംഗ് എന്നിവയ്ക്ക് ഏറ്റവും അനുയോജ്യം.";
+        window.translations.ml["modal.grades.b.title"] = "നല്ലത് & സ്ഥിരതയുള്ളത്";
+        window.translations.ml["modal.grades.b.desc"] = "വേഗതയേറിയ പ്രതികരണം. എച്ച്ഡി വീഡിയോ കോളുകൾക്കും ഓഫീസ് ജോലികൾക്കും മികച്ചത്.";
+        window.translations.ml["modal.grades.c.title"] = "സാധാരണം & സ്വീകാര്യം";
+        window.translations.ml["modal.grades.c.desc"] = "ബ്രൗസിംഗിനും ഇമെയിൽ അയക്കാനും മതിയാകും. ചിലപ്പോൾ ബഫറിംഗ് ഉണ്ടായേക്കാം.";
+        window.translations.ml["modal.grades.df.title"] = "മോശം & അസ്ഥിരമാണ്";
+        window.translations.ml["modal.grades.df.desc"] = "ഉയർന്ന ലേറ്റൻസി അല്ലെങ്കിൽ കൂടുതൽ പാക്കറ്റ് നഷ്ടം. കണക്ഷൻ അടിക്കടി തടസ്സപ്പെടാൻ സാധ്യതയുണ്ട്.";
+
+        // Punjabi (pa)
+        window.translations.pa["check.ws.result"] = "ਇਕੋ: {echo}ms (ਕਨੈਕਸ਼ਨ: {hand}ms)";
+        window.translations.pa["check.downlink.cdn"] = "{speed} Mbps (CDN ਡਾਊਨਲੋਡ)";
+        window.translations.pa["check.downlink.browser"] = "{speed} Mbps ({type})";
+        window.translations.pa["check.downlink.unreported"] = "ਸਪੀਡ ਪਤਾ ਨਹੀਂ ਲੱਗੀ";
+        window.translations.pa["modal.grades.title"] = "ਕਨੈਕਸ਼ਨ ਗੁਣਵੱਤਾ ਗ੍ਰੇਡ";
+        window.translations.pa["modal.grades.a.title"] = "ਉੱਤਮ ਅਤੇ ਬਹੁਤ ਵਧੀਆ";
+        window.translations.pa["modal.grades.a.desc"] = "ਪੂਰੀ ਸਥਿਰਤਾ ਅਤੇ ਬਹੁਤ ਘੱਟ ਦੇਰੀ। ਗੇਮਿੰਗ, 4K ਸਟ੍ਰੀਮਿੰਗ ਅਤੇ ਹੋਰ ਰੀਅਲ-ਟਾਈਮ ਵਰਤੋਂ ਲਈ ਉੱਤਮ।";
+        window.translations.pa["modal.grades.b.title"] = "ਵਧੀਆ ਅਤੇ ਸਥਿਰ";
+        window.translations.pa["modal.grades.b.desc"] = "ਤੇਜ਼ ਪ੍ਰਤੀਕਿਰਿਆ। ਐਚਡੀ ਵੀਡੀਓ ਕਾਲਾਂ ਅਤੇ ਰੀਮੋਟ ਦਫਤਰ ਦੇ ਕੰਮਾਂ ਲਈ ਵਧੀਆ।";
+        window.translations.pa["modal.grades.c.title"] = "ਦਰਮਿਆਨਾ ਅਤੇ ਸਵੀਕਾਰਯੋਗ";
+        window.translations.pa["modal.grades.c.desc"] = "ਵੈੱਬ ਬ੍ਰਾਊਜ਼ਿੰਗ ਅਤੇ ਈਮੇਲਾਂ ਲਈ ਠੀਕ ਹੈ। ਕਦੇ-ਕਦਾਈਂ ਬਫਰਿੰਗ ਹੋ ਸਕਦੀ ਹੈ।";
+        window.translations.pa["modal.grades.df.title"] = "ਖਰਾਬ ਅਤੇ ਅਸਥਿਰ";
+        window.translations.pa["modal.grades.df.desc"] = "ਗੰਭੀਰ ਦੇਰੀ ਜਾਂ ਉੱਚ ਪੈਕੇਟ ਨੁਕਸਾਨ। ਕਨੈਕਸ਼ਨ ਵਾਰ-ਵਾਰ ਟੁੱਟ ਸਕਦਾ ਹੈ ਅਤੇ ਵੀਡੀਓ ਰੁਕ ਸਕਦੀ ਹੈ।";
+
+        // Marathi (mr)
+        window.translations.mr["check.ws.result"] = "इको: {echo}ms (कनेक्शन: {hand}ms)";
+        window.translations.mr["check.downlink.cdn"] = "{speed} Mbps (CDN डाउनलोड)";
+        window.translations.mr["check.downlink.browser"] = "{speed} Mbps ({type})";
+        window.translations.mr["check.downlink.unreported"] = "डाउनलोड गती कळाली नाही";
+        window.translations.mr["modal.grades.title"] = "कनेक्शन गुणवत्ता श्रेणी";
+        window.translations.mr["modal.grades.a.title"] = "सर्वोत्तम आणि उत्कृष्ट";
+        window.translations.mr["modal.grades.a.desc"] = "पूर्ण स्थिरता आणि अत्यंत कमी विलंबता. ऑनलाइन गेमिंग, 4K स्ट्रीमिंग आणि रिअल-टाइम कामांसाठी सर्वोत्तम.";
+        window.translations.mr["modal.grades.b.title"] = "चांगले आणि स्थिर";
+        window.translations.mr["modal.grades.b.desc"] = "जलद प्रतिसाद. एचडी व्हिडिओ कॉन्फरन्स आणि रिमोट ऑफिस कामासाठी उत्तम.";
+        window.translations.mr["modal.grades.c.title"] = "साधारण आणि स्वीकार्य";
+        window.translations.mr["modal.grades.c.desc"] = "ब्राउझिंग आणि ईमेलसाठी योग्य. कधीकधी बफरिंगचा अनुभव येऊ शकतो.";
+        window.translations.mr["modal.grades.df.title"] = "खराब आणि अस्थिर";
+        window.translations.mr["modal.grades.df.desc"] = "गंभीर विलंबता किंवा उच्च पॅकेट गळती. वारंवार कनेक्शन तुटणे आणि व्हिडिओ व्यत्यय येऊ शकतो.";
+
+        // Gujarati (gu)
+        window.translations.gu["check.ws.result"] = "ઇકો: {echo}ms (કનેક્શન: {hand}ms)";
+        window.translations.gu["check.downlink.cdn"] = "{speed} Mbps (CDN ડાઉનલોડ)";
+        window.translations.gu["check.downlink.browser"] = "{speed} Mbps ({type})";
+        window.translations.gu["check.downlink.unreported"] = "ડાઉનલોડ ઝડપ મળી નથી";
+        window.translations.gu["modal.grades.title"] = "કનેક્શન પ્રદર્શન ગ્રેડ";
+        window.translations.gu["modal.grades.a.title"] = "સર્વોત્તમ અને ઉત્કૃષ્ટ";
+        window.translations.gu["modal.grades.a.desc"] = "સંપૂર્ણ સ્થિરતા અને ખૂબ ઓછી વિલંબતા. ઓનલાઇન ગેમિંગ, 4K સ્ટ્રીમિંગ અને રીઅલ-ટાઇમ કાર્યો માટે સર્વોત્તમ.";
+        window.translations.gu["modal.grades.b.title"] = "સારું અને સ્થિર";
+        window.translations.gu["modal.grades.b.desc"] = "ખૂબ ઝડપી પ્રતિસાદ. એચડી વિડિયો કોન્ફરન્સ અને રિમોટ ઓફિસના કાર્યો માટે ઉત્તમ.";
+        window.translations.gu["modal.grades.c.title"] = "સામાન્ય અને સ્વીકાર્ય";
+        window.translations.gu["modal.grades.c.desc"] = "બ્રાઉઝિંગ અને ઇમેઇલ માટે યોગ્ય. ક્યારેક બફરિંગ થઈ શકે છે.";
+        window.translations.gu["modal.grades.df.title"] = "ખરાબ અને અસ્થિર";
+        window.translations.gu["modal.grades.df.desc"] = "ગંભીર વિલંબતા અથવા ઉચ્ચ પેકેટ નુકસાન. કનેક્શન વારંવાર તૂટી શકે છે અને વિડિયોમાં અડચણ આવી શકે છે.";
     }
 
     function getTranslation(key, params = {}) {

@@ -1495,6 +1495,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set initial language from local storage preference or browser default
     setLanguage(currentLang);
 
+    // Welcome Language Selector Popup for first-time visitors
+    const welcomeModal = document.getElementById('lang-welcome-modal');
+    if (welcomeModal) {
+        const isFirstTime = !localStorage.getItem('np_lang_selected');
+        if (isFirstTime) {
+            welcomeModal.classList.remove('hidden');
+            
+            const welcomeBtns = welcomeModal.querySelectorAll('.welcome-lang-btn');
+            welcomeBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const selectedLang = e.currentTarget.getAttribute('data-lang');
+                    setLanguage(selectedLang);
+                    localStorage.setItem('np_lang_selected', 'true');
+                    welcomeModal.classList.add('hidden');
+                });
+            });
+        }
+    }
+
     // Run-once initial setups
     renderHistoryTable();
     renderCdnComparison(); // Renders nodes in empty state

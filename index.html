@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Test your network latency, jitter, packet loss, and overall quality with NetPulse. A modern, interactive web tool for real-time network diagnostics.">
     <title>NetPulse - Network Latency & Quality Diagnostics</title>
+    <!-- Vector Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300f2fe' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='22 12 18 12 15 21 9 3 6 12 2 12'/%3E%3C/svg%3E">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +24,7 @@
         <div class="header-container">
             <div class="logo-area">
                 <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" class="logo-pulse-path"/>
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" class="logo-pulse-path"/>
                 </svg>
                 <span class="logo-text">Net<span class="gradient-text">Pulse</span></span>
             </div>
@@ -479,6 +481,41 @@
                         <p data-i18n="modal.desc4">WebSockets maintain an active, full-duplex communication channel over a single TCP connection. HTTP sends discrete requests. NetPulse checks WebSocket ping times to test the responsiveness of modern chat, trading, and collaboration tools.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- First-Time Language Selector Welcome Modal -->
+    <div class="modal-overlay hidden" id="lang-welcome-modal">
+        <div class="modal-card welcome-card">
+            <div class="welcome-header">
+                <svg class="welcome-globe-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+                <h2>Welcome to NetPulse</h2>
+                <p>Please select your preferred language to begin / Por favor, seleccione su idioma / Bitte wählen Sie Ihre Sprache / कृपया अपनी भाषा चुनें / 言語を選択してください</p>
+            </div>
+            <div class="welcome-lang-grid">
+                <button class="welcome-lang-btn" data-lang="en">
+                    <span class="lang-native">English</span>
+                    <span class="lang-english">English</span>
+                </button>
+                <button class="welcome-lang-btn" data-lang="es">
+                    <span class="lang-native">Español</span>
+                    <span class="lang-english">Spanish</span>
+                </button>
+                <button class="welcome-lang-btn" data-lang="de">
+                    <span class="lang-native">Deutsch</span>
+                    <span class="lang-english">German</span>
+                </button>
+                <button class="welcome-lang-btn" data-lang="hi">
+                    <span class="lang-native">हिन्दी</span>
+                    <span class="lang-english">Hindi</span>
+                </button>
+                <button class="welcome-lang-btn" data-lang="ja">
+                    <span class="lang-native">日本語</span>
+                    <span class="lang-english">Japanese</span>
+                </button>
             </div>
         </div>
     </div>

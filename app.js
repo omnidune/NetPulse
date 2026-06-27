@@ -6,6 +6,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Global Translation Variables & Helpers
     let currentLang = localStorage.getItem('lang') || 'en';
+    const langNames = {
+        en: "English",
+        es: "Español",
+        de: "Deutsch",
+        hi: "हिन्दी",
+        ja: "日本語"
+    };
 
     // Extend translations dynamically to handle formatting parameters
     if (window.translations) {
@@ -51,11 +58,20 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('lang', lang);
         document.documentElement.lang = lang;
         
-        // Sync select dropdown
-        const langSelect = document.getElementById('lang-select');
-        if (langSelect && langSelect.value !== lang) {
-            langSelect.value = lang;
+        // Sync custom dropdown UI labels and states
+        const currentLangLabel = document.getElementById('current-lang-label');
+        if (currentLangLabel) {
+            currentLangLabel.textContent = langNames[lang] || "English";
         }
+
+        const items = document.querySelectorAll('.dropdown-item');
+        items.forEach(item => {
+            if (item.getAttribute('data-lang') === lang) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
 
         // Translate annotated DOM nodes
         const elements = document.querySelectorAll('[data-i18n]');
@@ -643,7 +659,11 @@ document.addEventListener('DOMContentLoaded', () => {
         checkWsValue.textContent = 'Waiting...';
         checkBrowserType.className = 'check-item pending';
         checkBrowserValue.textContent = 'Waiting...';
-        checkDnsLookup.classN    // Update real-time summary statistics
+        checkDnsLookup.className = 'check-item pending';
+        checkDnsValue.textContent = 'Waiting...';
+    }
+
+    // Update real-time summary statistics
     function updateStatistics(liveData) {
         const totalAllPings = liveData.length;
 
@@ -1392,11 +1412,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Sync language select dropdown change listener
-    const langSelect = document.getElementById('lang-select');
-    if (langSelect) {
-        langSelect.addEventListener('change', (e) => {
-            setLanguage(e.target.value);
+    // Custom dropdown menu functionality
+    const langDropdown = document.getElementById('language-dropdown');
+    const dropdownTrigger = document.getElementById('dropdown-trigger');
+
+    if (dropdownTrigger && langDropdown) {
+        // Toggle language menu
+        dropdownTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('open');
+        });
+
+        // Click options items to select language
+        const dropdownItems = langDropdown.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const selectedLang = e.currentTarget.getAttribute('data-lang');
+                setLanguage(selectedLang);
+                langDropdown.classList.remove('open');
+            });
+        });
+
+        // Close menu on clicking outside
+        document.addEventListener('click', (e) => {
+            if (!langDropdown.contains(e.target)) {
+                langDropdown.classList.remove('open');
+            }
         });
     }
 

@@ -31,14 +31,23 @@
                 <span id="global-status-text" class="status-text" data-i18n="status.ready">Ready to Test</span>
             </div>
             <div class="header-controls">
-                <div class="language-wrapper">
-                    <select id="lang-select" class="lang-select" aria-label="Select Language">
-                        <option value="en" selected>EN</option>
-                        <option value="es">ES</option>
-                        <option value="de">DE</option>
-                        <option value="hi">HI</option>
-                        <option value="ja">JA</option>
-                    </select>
+                <div class="language-dropdown" id="language-dropdown">
+                    <button class="dropdown-trigger" id="dropdown-trigger" aria-label="Select Language">
+                        <svg class="globe-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                        <span id="current-lang-label">English</span>
+                        <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="dropdown-menu">
+                        <button class="dropdown-item active" data-lang="en">English</button>
+                        <button class="dropdown-item" data-lang="es">Español</button>
+                        <button class="dropdown-item" data-lang="de">Deutsch</button>
+                        <button class="dropdown-item" data-lang="hi">हिन्दी</button>
+                        <button class="dropdown-item" data-lang="ja">日本語</button>
+                    </div>
                 </div>
                 <button id="theme-toggle" class="icon-button" aria-label="Toggle Theme">
                     <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

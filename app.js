@@ -20,26 +20,71 @@ document.addEventListener('DOMContentLoaded', () => {
         window.translations.en["check.downlink.cdn"] = "{speed} Mbps (CDN Fetch)";
         window.translations.en["check.downlink.browser"] = "{speed} Mbps ({type})";
         window.translations.en["check.downlink.unreported"] = "Downlink Unreported";
+        window.translations.en["modal.grades.title"] = "Connection Performance Grades";
+        window.translations.en["modal.grades.a.title"] = "Pristine & Excellent";
+        window.translations.en["modal.grades.a.desc"] = "Perfect stability and ultra-low latency. Ideal for high-stakes gaming, virtual reality, 4K streaming, and real-time trading.";
+        window.translations.en["modal.grades.b.title"] = "Good & Stable";
+        window.translations.en["modal.grades.b.desc"] = "Highly responsive. Excellent for high-definition video conferencing, casual gaming, and standard remote office operations.";
+        window.translations.en["modal.grades.c.title"] = "Fair & Acceptable";
+        window.translations.en["modal.grades.c.desc"] = "Passable for browsing, checking email, and social media. You may encounter occasional buffer cycles or in-game latency spikes.";
+        window.translations.en["modal.grades.df.title"] = "Poor & Unstable";
+        window.translations.en["modal.grades.df.desc"] = "Critical latency or high packet loss. Connection will frequently experience disconnects, lag, and audio/video interruptions.";
         
         window.translations.es["check.ws.result"] = "Eco: {echo}ms (Conexión: {hand}ms)";
         window.translations.es["check.downlink.cdn"] = "{speed} Mbps (Descarga CDN)";
         window.translations.es["check.downlink.browser"] = "{speed} Mbps ({type})";
         window.translations.es["check.downlink.unreported"] = "Velocidad no reportada";
+        window.translations.es["modal.grades.title"] = "Grados de rendimiento de conexión";
+        window.translations.es["modal.grades.a.title"] = "Prístino y excelente";
+        window.translations.es["modal.grades.a.desc"] = "Estabilidad perfecta y latencia ultra baja. Ideal para juegos competitivos, realidad virtual, transmisión 4K y trading en tiempo real.";
+        window.translations.es["modal.grades.b.title"] = "Bueno y estable";
+        window.translations.es["modal.grades.b.desc"] = "Altamente responsivo. Excelente para videoconferencias en alta definición, juegos casuales y operaciones estándar de oficina remota.";
+        window.translations.es["modal.grades.c.title"] = "Regular y aceptable";
+        window.translations.es["modal.grades.c.desc"] = "Aceptable para navegación, correo electrónico y redes sociales. Puede experimentar ciclos de almacenamiento en búfer ocasionales o picos de latencia en el juego.";
+        window.translations.es["modal.grades.df.title"] = "Deficiente e inestable";
+        window.translations.es["modal.grades.df.desc"] = "Latencia crítica o alta pérdida de paquetes. La conexión experimentará interrupciones frecuentes, retrasos y cortes de audio o video.";
         
         window.translations.de["check.ws.result"] = "Echo: {echo}ms (Handshake: {hand}ms)";
         window.translations.de["check.downlink.cdn"] = "{speed} Mbps (CDN-Abruf)";
         window.translations.de["check.downlink.browser"] = "{speed} Mbps ({type})";
         window.translations.de["check.downlink.unreported"] = "Geschwindigkeit nicht gemeldet";
+        window.translations.de["modal.grades.title"] = "Verbindungsleistungsklassen";
+        window.translations.de["modal.grades.a.title"] = "Hervorragend & exzellent";
+        window.translations.de["modal.grades.a.desc"] = "Perfekte Stabilität und extrem niedrige Latenz. Ideal für kompetitives Gaming, VR, 4K-Streaming und Echtzeithandel.";
+        window.translations.de["modal.grades.b.title"] = "Gut & stabil";
+        window.translations.de["modal.grades.b.desc"] = "Sehr reaktionsschnell. Hervorragend geeignet für hochauflösende Videokonferenzen, Gelegenheitsspiele und Standard-Homeoffice-Arbeiten.";
+        window.translations.de["modal.grades.c.title"] = "Mittelmäßig & akzeptabel";
+        window.translations.de["modal.grades.c.desc"] = "Ausreichend für Surfen, E-Mails und soziale Medien. Es kann gelegentlich zu Pufferzeiten oder Latenzspitzen im Spiel kommen.";
+        window.translations.de["modal.grades.df.title"] = "Schlecht & instabil";
+        window.translations.de["modal.grades.df.desc"] = "Kritische Latenzzeit oder hoher Paketverlust. Die Verbindung leidet häufig unter Verbindungsabbrüchen, Verzögerungen sowie Audio-/Videounterbrechungen.";
         
         window.translations.hi["check.ws.result"] = "इको: {echo}ms (हैंडशेक: {hand}ms)";
         window.translations.hi["check.downlink.cdn"] = "{speed} Mbps (CDN फ़ेच)";
         window.translations.hi["check.downlink.browser"] = "{speed} Mbps ({type})";
         window.translations.hi["check.downlink.unreported"] = "डाउनलिंक असूचित";
+        window.translations.hi["modal.grades.title"] = "कनेक्शन प्रदर्शन ग्रेड";
+        window.translations.hi["modal.grades.a.title"] = "सर्वोत्तम और उत्कृष्ट";
+        window.translations.hi["modal.grades.a.desc"] = "पूर्ण स्थिरता और बेहद कम विलंबता (लो पिंग)। ऑनलाइन गेमिंग, 4K स्ट्रीमिंग और रियल-टाइम ट्रेडिंग के लिए सर्वोत्तम।";
+        window.translations.hi["modal.grades.b.title"] = "अच्छा और स्थिर";
+        window.translations.hi["modal.grades.b.desc"] = "अत्यधिक प्रतिक्रियाशील। एचडी वीडियो कॉन्फ्रेंसिंग, सामान्य गेमिंग और रिमोट ऑफिस कार्यों के लिए बेहतरीन।";
+        window.translations.hi["modal.grades.c.title"] = "साधारण और स्वीकार्य";
+        window.translations.hi["modal.grades.c.desc"] = "ब्राउज़िंग, ईमेल और सोशल मीडिया के लिए ठीक। कभी-कभी बफरिंग या गेम में हल्की रुकावट देखने को मिल सकती है।";
+        window.translations.hi["modal.grades.df.title"] = "खराब और अस्थिर";
+        window.translations.hi["modal.grades.df.desc"] = "गंभीर विलंबता या उच्च पैकेट नुकसान। कनेक्शन में बार-बार डिस्कनेक्ट होना, भारी लैग और ऑडियो/वीडियो में रुकावटें आ सकती हैं।";
         
         window.translations.ja["check.ws.result"] = "応答: {echo}ms (接続: {hand}ms)";
         window.translations.ja["check.downlink.cdn"] = "{speed} Mbps (CDN取得)";
         window.translations.ja["check.downlink.browser"] = "{speed} Mbps ({type})";
         window.translations.ja["check.downlink.unreported"] = "下り速度取得不可";
+        window.translations.ja["modal.grades.title"] = "接続品質評価基準";
+        window.translations.ja["modal.grades.a.title"] = "最高評価 & 優秀";
+        window.translations.ja["modal.grades.a.desc"] = "完璧な安定性と極限の低遅延。FPSゲームやクラウドゲーミング、4K配信、リアルタイム金融取引に最適です。";
+        window.translations.ja["modal.grades.b.title"] = "良好 & 安定";
+        window.translations.ja["modal.grades.b.desc"] = "優れた応答性。高画質なビデオ会議や一般的なネット利用、日常のリモートワーク作業に十分適しています。";
+        window.translations.ja["modal.grades.c.title"] = "普通 & 許容可能";
+        window.translations.ja["modal.grades.c.desc"] = "Web閲覧やSNS、メール送受信向け。ゲームの遅延や動画視聴時のバッファリングがたまに発生する可能性があります。";
+        window.translations.ja["modal.grades.df.title"] = "低品質 & 不安定";
+        window.translations.ja["modal.grades.df.desc"] = "深刻な遅延や高確率のパケットロス。切断、強烈なラグ、音声・ビデオ通話のプツプツとした途切れが多発します。";
     }
 
     function getTranslation(key, params = {}) {
@@ -859,6 +904,12 @@ document.addEventListener('DOMContentLoaded', () => {
         isTesting = true;
         pingData = [];
         resetMetricsDisplay();
+        
+        // Smooth scroll viewport to the top so the live gauge remains in full focus
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
         
         // Disable form inputs during test run
         serverSelect.disabled = true;

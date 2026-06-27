@@ -46,6 +46,7 @@ window.translations = {
         "gauge.label": "CURRENT PING",
         
         "controls.server": "Diagnostic Server",
+        "controls.server.combined": "Combined / Multi-Endpoint (Default)",
         "controls.custom": "Custom HTTPS URL",
         "controls.helper": "Requires HTTPS. Standard fetch (no-cors) is used.",
         "controls.duration": "Duration",
@@ -156,6 +157,7 @@ window.translations = {
         "gauge.label": "PING ACTUAL",
         
         "controls.server": "Servidor de diagnóstico",
+        "controls.server.combined": "Combinado / Multi-Endpoint (Predeterminado)",
         "controls.custom": "URL HTTPS personalizada",
         "controls.helper": "Requiere HTTPS. Se utiliza fetch estándar (no-cors).",
         "controls.duration": "Duración",
@@ -266,6 +268,7 @@ window.translations = {
         "gauge.label": "AKTUELLER PING",
         
         "controls.server": "Diagnoseserver",
+        "controls.server.combined": "Kombiniert / Multi-Endpoint (Standard)",
         "controls.custom": "Benutzerdefinierte HTTPS-URL",
         "controls.helper": "Erfordert HTTPS. Es wird Standard-Fetch (no-cors) verwendet.",
         "controls.duration": "Dauer",
@@ -376,6 +379,7 @@ window.translations = {
         "gauge.label": "वर्तमान पिंग",
         
         "controls.server": "निदान सर्वर",
+        "controls.server.combined": "संयुक्त / मल्टी-एंडपॉइंट (डिफ़ॉल्ट)",
         "controls.custom": "कस्टम HTTPS URL",
         "controls.helper": "HTTPS की आवश्यकता है। मानक फ़ेच (no-cors) का उपयोग किया जाता है।",
         "controls.duration": "अवधि",
@@ -486,6 +490,7 @@ window.translations = {
         "gauge.label": "現在のピング",
         
         "controls.server": "診断サーバー",
+        "controls.server.combined": "総合 / マルチエンドポイント (デフォルト)",
         "controls.custom": "カスタム HTTPS URL",
         "controls.helper": "HTTPS が必要です。標準 fetch (no-cors) が使用されます。",
         "controls.duration": "テスト期間",

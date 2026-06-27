@@ -1541,10 +1541,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Handle escape key closing modal
+    // Handle escape key closing modals
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !aboutModal.classList.contains('hidden')) {
-            aboutModal.classList.add('hidden');
+        if (e.key === 'Escape') {
+            if (aboutModal && !aboutModal.classList.contains('hidden')) {
+                aboutModal.classList.add('hidden');
+            }
+            if (welcomeModal && !welcomeModal.classList.contains('hidden')) {
+                welcomeModal.classList.add('hidden');
+                localStorage.setItem('np_lang_selected', 'true'); // Accept defaults on escape
+            }
         }
     });
 
@@ -1622,7 +1628,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Toggle language menu
         dropdownTrigger.addEventListener('click', (e) => {
             e.stopPropagation();
-            langDropdown.classList.toggle('open');
+            const isOpen = langDropdown.classList.toggle('open');
+            dropdownTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
 
         // Click options items to select language
@@ -1632,6 +1639,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const selectedLang = e.currentTarget.getAttribute('data-lang');
                 setLanguage(selectedLang);
                 langDropdown.classList.remove('open');
+                dropdownTrigger.setAttribute('aria-expanded', 'false');
             });
         });
 
@@ -1639,6 +1647,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('click', (e) => {
             if (!langDropdown.contains(e.target)) {
                 langDropdown.classList.remove('open');
+                dropdownTrigger.setAttribute('aria-expanded', 'false');
             }
         });
     }

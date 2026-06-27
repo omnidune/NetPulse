@@ -21,50 +21,50 @@
         <div class="glow-orb glow-orb-2"></div>
     </div>
 
-    <header class="app-header">
+    <header class="app-header" role="banner">
         <div class="header-container">
             <div class="logo-area">
-                <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" class="logo-pulse-path"/>
                 </svg>
                 <span class="logo-text">Net<span class="gradient-text">Pulse</span></span>
             </div>
-            <div class="status-indicator-bar">
+            <div class="status-indicator-bar" aria-live="polite">
                 <span class="status-dot green" id="global-status-dot"></span>
                 <span id="global-status-text" class="status-text" data-i18n="status.ready">Ready to Test</span>
             </div>
             <div class="header-controls">
                 <div class="language-dropdown" id="language-dropdown">
-                    <button class="dropdown-trigger" id="dropdown-trigger" aria-label="Select Language">
-                        <svg class="globe-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <button class="dropdown-trigger" id="dropdown-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Select Language">
+                        <svg class="globe-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                         </svg>
                         <span id="current-lang-label">English</span>
-                        <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <polyline points="6 9 12 15 18 9"/>
                         </svg>
                     </button>
-                    <div class="dropdown-menu" id="dropdown-menu">
-                        <button class="dropdown-item active" data-lang="en">English</button>
-                        <button class="dropdown-item" data-lang="es">Español</button>
-                        <button class="dropdown-item" data-lang="de">Deutsch</button>
-                        <button class="dropdown-item" data-lang="hi">हिन्दी</button>
-                        <button class="dropdown-item" data-lang="ja">日本語</button>
-                        <button class="dropdown-item" data-lang="ta">தமிழ்</button>
-                        <button class="dropdown-item" data-lang="te">తెలుగు</button>
-                        <button class="dropdown-item" data-lang="ml">മലയാളം</button>
-                        <button class="dropdown-item" data-lang="pa">ਪੰਜਾਬੀ</button>
-                        <button class="dropdown-item" data-lang="mr">मराठी</button>
-                        <button class="dropdown-item" data-lang="gu">ગુજરાતી</button>
-                        <button class="dropdown-item" data-lang="bn">বাংলা</button>
+                    <div class="dropdown-menu" id="dropdown-menu" role="listbox" aria-label="Languages">
+                        <button class="dropdown-item active" role="option" aria-selected="true" data-lang="en">English</button>
+                        <button class="dropdown-item" role="option" aria-selected="false" data-lang="es">Español</button>
+                        <button class="dropdown-item" role="option" aria-selected="false" data-lang="de">Deutsch</button>
+                        <button class="dropdown-item" role="option" aria-selected="false" data-lang="hi">हिन्दी</button>
+                        <button class="dropdown-item" role="option" aria-selected="false" data-lang="ja">日本語</button>
+                        <button class="dropdown-item" role="option" aria-selected="false" data-lang="ta">தமிழ்</button>
+                        <button class="dropdown-item" role="option" aria-selected="false" data-lang="te">తెలుగు</button>
+                        <button class="dropdown-item" role="option" aria-selected="false" data-lang="ml">മലയാളം</button>
+                        <button class="dropdown-item" role="option" aria-selected="false" data-lang="pa">ਪੰਜਾਬੀ</button>
+                        <button class="dropdown-item" role="option" aria-selected="false" data-lang="mr">मराठी</button>
+                        <button class="dropdown-item" role="option" aria-selected="false" data-lang="gu">ગુજરાતી</button>
+                        <button class="dropdown-item" role="option" aria-selected="false" data-lang="bn">বাংলা</button>
                     </div>
                 </div>
-                <button id="theme-toggle" class="icon-button" aria-label="Toggle Theme">
-                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <button id="theme-toggle" class="icon-button" aria-label="Toggle dark or light theme" title="Toggle Theme">
+                    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <circle cx="12" cy="12" r="4"/>
                         <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
                     </svg>
-                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
                     </svg>
                 </button>
@@ -425,12 +425,12 @@
     </footer>
 
     <!-- About Modal Dialog -->
-    <div class="modal-overlay hidden" id="about-modal">
+    <div class="modal-overlay hidden" id="about-modal" role="dialog" aria-modal="true" aria-labelledby="about-modal-title">
         <div class="modal-card">
             <div class="modal-header">
-                <h2 data-i18n="modal.title">Understanding Network Quality</h2>
-                <button class="icon-button close-modal" id="btn-close-modal">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <h2 id="about-modal-title" data-i18n="modal.title">Understanding Network Quality</h2>
+                <button class="icon-button close-modal" id="btn-close-modal" aria-label="Close modal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                     </svg>
                 </button>
@@ -496,13 +496,13 @@
     </div>
 
     <!-- First-Time Language Selector Welcome Modal -->
-    <div class="modal-overlay hidden" id="lang-welcome-modal">
+    <div class="modal-overlay hidden" id="lang-welcome-modal" role="dialog" aria-modal="true" aria-labelledby="welcome-modal-title">
         <div class="modal-card welcome-card">
             <div class="welcome-header">
-                <svg class="welcome-globe-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="welcome-globe-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                 </svg>
-                <h2>Welcome to NetPulse</h2>
+                <h2 id="welcome-modal-title">Welcome to NetPulse</h2>
                 <p>Please select your preferred language to begin / Por favor, seleccione su idioma / Bitte wählen Sie Ihre Sprache / कृपया अपनी भाषा चुनें / 言語を選択してください</p>
             </div>
             <div class="welcome-lang-grid">

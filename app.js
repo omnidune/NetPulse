@@ -848,6 +848,7 @@ document.addEventListener('DOMContentLoaded', () => {
             verdict = getTranslation('verdict.fair', { avg });
         } else {
             verdict = getTranslation('verdict.poor', { avg, loss: lossPct });
+        }
         verdictDesc.textContent = verdict;
     }
 

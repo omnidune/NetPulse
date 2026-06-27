@@ -1640,3 +1640,129 @@ body.light-theme .welcome-lang-btn {
     color: var(--text-secondary);
     opacity: 0.8;
 }
+
+/* Floating Action Button (FAB) at Bottom Left */
+.btn-floating-action {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    border: none;
+    color: #07090e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(0, 242, 254, 0.45);
+    z-index: 999;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    will-change: transform;
+}
+
+body.light-theme .btn-floating-action {
+    color: #ffffff;
+    background: linear-gradient(135deg, #0077b6 0%, #0096c7 100%);
+    box-shadow: 0 8px 30px rgba(0, 119, 182, 0.35);
+}
+
+.btn-floating-action:hover {
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0, 242, 254, 0.65);
+}
+
+body.light-theme .btn-floating-action:hover {
+    box-shadow: 0 12px 35px rgba(0, 119, 182, 0.55);
+}
+
+.btn-floating-action:active {
+    transform: scale(0.95);
+}
+
+.fab-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-floating-action .icon-play {
+    display: block;
+    margin-left: 2px; /* optical alignment for play triangle */
+}
+
+.btn-floating-action .icon-stop {
+    display: none;
+}
+
+/* Floating Action Button (FAB) Testing State */
+.btn-floating-action.testing {
+    background: linear-gradient(135deg, #ff1744 0%, #d50000 100%);
+    color: #ffffff;
+    box-shadow: 0 8px 30px rgba(255, 23, 68, 0.45);
+    animation: fabPulse 2.0s infinite;
+}
+
+.btn-floating-action.testing:hover {
+    box-shadow: 0 12px 35px rgba(255, 23, 68, 0.65);
+}
+
+.btn-floating-action.testing .icon-play {
+    display: none;
+}
+
+.btn-floating-action.testing .icon-stop {
+    display: block;
+}
+
+@keyframes fabPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 23, 68, 0.6); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 23, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 23, 68, 0); }
+}
+
+/* FAB Hover Tooltip */
+.fab-tooltip {
+    position: absolute;
+    left: 74px;
+    background: rgba(17, 20, 34, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--card-border);
+    color: var(--text-primary);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-10px);
+    transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+body.light-theme .fab-tooltip {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.btn-floating-action:hover .fab-tooltip {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Adjustments on mobile viewports */
+@media (max-width: 480px) {
+    .btn-floating-action {
+        bottom: 16px;
+        left: 16px;
+        width: 52px;
+        height: 52px;
+    }
+    
+    .fab-tooltip {
+        left: 64px;
+    }
+}

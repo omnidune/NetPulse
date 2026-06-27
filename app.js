@@ -17,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ml: "മലയാളം",
         pa: "ਪੰਜਾਬੀ",
         mr: "मराठी",
-        gu: "ગુજરાતી"
+        gu: "ગુજરાતી",
+        bn: "বাংলা"
     };
 
     // Extend translations dynamically to handle formatting parameters
@@ -181,6 +182,21 @@ document.addEventListener('DOMContentLoaded', () => {
         window.translations.gu["modal.grades.c.desc"] = "બ્રાઉઝિંગ અને ઇમેઇલ માટે યોગ્ય. ક્યારેક બફરિંગ થઈ શકે છે.";
         window.translations.gu["modal.grades.df.title"] = "ખરાબ અને અસ્થિર";
         window.translations.gu["modal.grades.df.desc"] = "ગંભીર વિલંબતા અથવા ઉચ્ચ પેકેટ નુકસાન. કનેક્શન વારંવાર તૂટી શકે છે અને વિડિયોમાં અડચણ આવી શકે છે.";
+
+        // Bengali (bn)
+        window.translations.bn["check.ws.result"] = "ইকো: {echo}ms (সংযোগ: {hand}ms)";
+        window.translations.bn["check.downlink.cdn"] = "{speed} Mbps (CDN ডাউনলোড)";
+        window.translations.bn["check.downlink.browser"] = "{speed} Mbps ({type})";
+        window.translations.bn["check.downlink.unreported"] = "ডাউনলোড গতি জানা যায়নি";
+        window.translations.bn["modal.grades.title"] = "সংযোগ পারফরম্যান্সের গ্রেড";
+        window.translations.bn["modal.grades.a.title"] = "আদিম ও চমৎকার";
+        window.translations.bn["modal.grades.a.desc"] = "নিখুঁত স্থায়িত্ব এবং অতি-নিম্ন ল্যাটেন্সি। প্রতিযোগিতামূলক অনলাইন গেমিং, VR, 4K ভিডিও এবং রিয়েল-টাইম ট্রেডিংয়ের জন্য আদর্শ।";
+        window.translations.bn["modal.grades.b.title"] = "ভালো ও স্থিতিশীল";
+        window.translations.bn["modal.grades.b.desc"] = "খুবই প্রতিক্রিয়াশীল। হাই-ডেফিনিশন ভিডিও কল এবং রিমোট অফিসের কাজের জন্য চমৎকার।";
+        window.translations.bn["modal.grades.c.title"] = "মোটামুটি ও গ্রহণযোগ্য";
+        window.translations.bn["modal.grades.c.desc"] = "সাধারণ ব্রাউজিং এবং সোশ্যাল মিডিয়ার জন্য যথেষ্ট। তবে গেমিং বা ভিডিও স্ট্রিমিংয়ে মাঝে মাঝে বাফারিং হতে পারে।";
+        window.translations.bn["modal.grades.df.title"] = "দুর্বল ও অস্থিতিশীল";
+        window.translations.bn["modal.grades.df.desc"] = "মারাত্মক ল্যাটেন্সি বা উচ্চ প্যাকেট ক্ষতি। ঘন ঘন সংযোগ বিচ্ছিন্নতা, ল্যাগ এবং অডিও/ভিডিওতে ব্যাঘাত ঘটবে।";
     }
 
     function getTranslation(key, params = {}) {

@@ -355,6 +355,7 @@ body.light-theme .sun-icon { display: block; }
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-wrap: wrap;
 }
 
 .card-title-wrapper h3 {
@@ -363,6 +364,15 @@ body.light-theme .sun-icon { display: block; }
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+.card-hint {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    opacity: 0.5;
+    letter-spacing: 0;
+    margin-left: 2px;
 }
 
 .card-icon {

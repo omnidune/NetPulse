@@ -1641,11 +1641,38 @@ body.light-theme .welcome-lang-btn {
     opacity: 0.8;
 }
 
-/* Floating Action Button (FAB) at Bottom Left */
+/* Welcome Overlay (Frosted Page Filter) */
+.welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 12, 22, 0.72);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    z-index: 990; /* under FAB but above page cards */
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), pointer-events 0.6s ease;
+    pointer-events: auto;
+    will-change: opacity, backdrop-filter;
+}
+
+body.light-theme .welcome-overlay {
+    background: rgba(240, 242, 248, 0.75);
+}
+
+.welcome-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+}
+
+/* Floating Action Button (FAB) */
 .btn-floating-action {
     position: fixed;
     bottom: 24px;
-    left: 24px;
+    right: 24px; /* Default: Bottom Right floating position! */
     width: 58px;
     height: 58px;
     border-radius: 50%;
@@ -1658,14 +1685,48 @@ body.light-theme .welcome-lang-btn {
     cursor: pointer;
     box-shadow: 0 8px 30px rgba(0, 242, 254, 0.45);
     z-index: 999;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    will-change: transform;
+    transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1); /* Smoother longer transition for motion snap */
+    will-change: bottom, right, width, height, transform, box-shadow;
 }
 
 body.light-theme .btn-floating-action {
     color: #ffffff;
     background: linear-gradient(135deg, #0077b6 0%, #0096c7 100%);
     box-shadow: 0 8px 30px rgba(0, 119, 182, 0.35);
+}
+
+/* FAB Centered Welcoming Position */
+.btn-floating-action.center-position {
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%, 50%) scale(1);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 0 15px 45px rgba(0, 242, 254, 0.35);
+    animation: centerPulse 3s infinite ease-in-out;
+}
+
+body.light-theme .btn-floating-action.center-position {
+    box-shadow: 0 15px 45px rgba(0, 119, 182, 0.3);
+}
+
+@keyframes centerPulse {
+    0%, 100% { transform: translate(50%, 50%) scale(1); box-shadow: 0 15px 40px rgba(0, 242, 254, 0.35); }
+    50% { transform: translate(50%, 50%) scale(1.04); box-shadow: 0 20px 50px rgba(0, 242, 254, 0.5); }
+}
+
+@keyframes centerPulseLight {
+    0%, 100% { transform: translate(50%, 50%) scale(1); box-shadow: 0 15px 40px rgba(0, 119, 182, 0.3); }
+    50% { transform: translate(50%, 50%) scale(1.04); box-shadow: 0 20px 50px rgba(0, 119, 182, 0.45); }
+}
+
+body.light-theme .btn-floating-action.center-position {
+    animation: centerPulseLight 3s infinite ease-in-out;
+}
+
+.btn-floating-action.center-position:hover {
+    transform: translate(50%, 50%) scale(1.08);
 }
 
 .btn-floating-action:hover {
@@ -1689,14 +1750,21 @@ body.light-theme .btn-floating-action:hover {
 
 .btn-floating-action .icon-play {
     display: block;
-    margin-left: 2px; /* optical alignment for play triangle */
+    margin-left: 2px; /* optical alignment */
+    transition: transform 0.3s ease;
+}
+
+/* Make Play icon larger when button is centered */
+.btn-floating-action.center-position .icon-play {
+    transform: scale(1.8);
+    margin-left: 5px;
 }
 
 .btn-floating-action .icon-stop {
     display: none;
 }
 
-/* Floating Action Button (FAB) Testing State */
+/* FAB Testing State */
 .btn-floating-action.testing {
     background: linear-gradient(135deg, #ff1744 0%, #d50000 100%);
     color: #ffffff;
@@ -1725,7 +1793,8 @@ body.light-theme .btn-floating-action:hover {
 /* FAB Hover Tooltip */
 .fab-tooltip {
     position: absolute;
-    left: 74px;
+    right: 74px; /* Tooltip on left side of bottom-right FAB */
+    left: auto;
     background: rgba(17, 20, 34, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -1738,7 +1807,7 @@ body.light-theme .btn-floating-action:hover {
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
-    transform: translateX(-10px);
+    transform: translateX(10px);
     transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
@@ -1748,21 +1817,46 @@ body.light-theme .fab-tooltip {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
+/* When centered, expand the tooltip description and lock it visible */
+.btn-floating-action.center-position .fab-tooltip {
+    right: 50%;
+    top: calc(100% + 16px);
+    transform: translateX(50%);
+    opacity: 1;
+    pointer-events: auto;
+    font-size: 0.95rem;
+    padding: 10px 18px;
+    border-radius: 20px;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 5px 15px rgba(0, 242, 254, 0.2);
+}
+
 .btn-floating-action:hover .fab-tooltip {
     opacity: 1;
     transform: translateX(0);
+}
+
+.btn-floating-action.center-position:hover .fab-tooltip {
+    transform: translateX(50%) scale(1.02);
 }
 
 /* Adjustments on mobile viewports */
 @media (max-width: 480px) {
     .btn-floating-action {
         bottom: 16px;
-        left: 16px;
+        right: 16px;
         width: 52px;
         height: 52px;
     }
     
+    .btn-floating-action.center-position {
+        bottom: 50%;
+        right: 50%;
+        width: 100px;
+        height: 100px;
+    }
+    
     .fab-tooltip {
-        left: 64px;
+        right: 64px;
     }
 }

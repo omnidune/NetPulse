@@ -910,6 +910,13 @@ document.addEventListener('DOMContentLoaded', () => {
             behavior: 'smooth'
         });
         
+        // Fade out frosted welcome backdrop and glide diagnostics button to bottom-right corner
+        const welcomeOverlay = document.getElementById('welcome-overlay');
+        if (welcomeOverlay) {
+            welcomeOverlay.classList.add('hidden');
+        }
+        startTestBtn.classList.remove('center-position');
+        
         // Disable form inputs during test run
         serverSelect.disabled = true;
         customServerInput.disabled = true;

@@ -225,6 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let continuousMode = false;
     let wasPausedByVisibility = false;
     let runPingIterationRef = null;
+    let wakeLock = null; // Screen Wake Lock reference to keep screen active on mobile
     const MAX_CONTINUOUS_PINGS = 1200; // ~10 minutes safety cutoff at 500ms interval
     
     // Custom Canvas Chart Class Definition
@@ -589,6 +590,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Screen Wake Lock API Helpers to prevent screen sleep during test runs
+    async function requestWakeLock() {
+        if (!('wakeLock' in navigator)) return;
+        try {
+            if (wakeLock === null) {
+                wakeLock = await navigator.wakeLock.request('screen');
+                console.log('Screen Wake Lock acquired');
+            }
+        } catch (err) {
+            console.warn(`Screen Wake Lock failed: ${err.name}, ${err.message}`);
+        }
+    }
+
+    function releaseWakeLock() {
+        if (wakeLock !== null) {
+            try {
+                wakeLock.release();
+                wakeLock = null;
+                console.log('Screen Wake Lock released');
+            } catch (err) {
+                console.warn('Failed to release Wake Lock:', err);
+            }
+        }
+    }
+
     // Core Ping Engine
     async function pingServer(url, timeoutMs = 1500, noCors = false) {
         const controller = new AbortController();
@@ -902,6 +928,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         isTesting = true;
         pingData = [];
+        requestWakeLock(); // Prevent screen sleep during diagnostics
         resetMetricsDisplay();
         
         // Smooth scroll viewport to the top so the live gauge remains in full focus
@@ -1033,6 +1060,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isTesting) return;
         clearTimeout(testIntervalId);
         isTesting = false;
+        releaseWakeLock(); // Allow screen sleep when diagnostic is halted
         
         // Re-enable form fields
         serverSelect.disabled = false;
@@ -1054,6 +1082,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function completeDiagnosticTest() {
         clearTimeout(testIntervalId);
         isTesting = false;
+        releaseWakeLock(); // Allow screen sleep when diagnostic finishes
 
         // Re-enable form fields
         serverSelect.disabled = false;
@@ -1411,6 +1440,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function autoPauseContinuousTest() {
         clearTimeout(testIntervalId);
         isTesting = false;
+        releaseWakeLock(); // Allow screen sleep on auto-pause
 
         // Re-enable form fields
         serverSelect.disabled = false;
@@ -1444,6 +1474,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Pause continuous or timed testing on tab change to conserve CPU/Battery
                 wasPausedByVisibility = true;
                 clearTimeout(testIntervalId);
+                releaseWakeLock(); // Release lock when page is hidden
                 
                 globalStatusDot.className = 'status-dot yellow';
                 globalStatusText.textContent = getTranslation('status.paused');
@@ -1466,6 +1497,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (runPingIterationRef) {
                     testIntervalId = setTimeout(runPingIterationRef, intervalMs);
                 }
+                requestWakeLock(); // Re-acquire lock when page is visible and active again
             }
         }
     });

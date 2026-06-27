@@ -205,12 +205,13 @@ body {
 }
 
 .logo-pulse-path {
-    animation: pulseLogo 3s infinite ease-in-out;
+    animation: pulseLogo 4s infinite ease-in-out;
+    will-change: opacity;
 }
 
 @keyframes pulseLogo {
-    0%, 100% { stroke-dasharray: 60; stroke-dashoffset: 0; opacity: 0.8; }
-    50% { stroke-dasharray: 60; stroke-dashoffset: 30; opacity: 1; filter: drop-shadow(0 0 3px var(--accent-cyan)); }
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
 }
 
 .status-indicator-bar {
@@ -533,7 +534,9 @@ body.light-theme .sun-icon { display: block; }
     border-radius: 50%;
     border: 2px solid rgba(0, 242, 254, 0.3);
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease;
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
 }
 
 /* Pulsing states */
@@ -574,6 +577,8 @@ body.light-theme .sun-icon { display: block; }
     stroke: url(#gauge-grad);
     stroke-linecap: round;
     transition: stroke-dashoffset 0.4s cubic-bezier(0.1, 0.8, 0.25, 1);
+    will-change: stroke-dashoffset;
+    transform: translate3d(0, 0, 0);
 }
 
 /* Linear gradients for SVG inside app.js if needed, or define in custom tags */

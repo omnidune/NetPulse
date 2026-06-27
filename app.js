@@ -668,7 +668,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Dynamically color coordinate stroke based on performance HSL (140 green to 0 red)
         const hue = pct * 140;
         gaugeProgress.style.stroke = `hsl(${hue}, 100%, 50%)`;
-        gaugeProgress.style.filter = `drop-shadow(0 0 6px hsl(${hue}, 100%, 50%))`;
     }
 
     // Initialize/Reset Metrics dashboard

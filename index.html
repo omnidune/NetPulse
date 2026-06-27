@@ -3,8 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Test your network latency, jitter, packet loss, and overall quality with NetPulse. A modern, interactive web tool for real-time network diagnostics.">
     <title>NetPulse - Network Latency & Quality Diagnostics</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="NetPulse - Network Latency & Quality Diagnostics">
+    <meta name="description" content="Test your network latency, jitter, packet loss, and overall quality with NetPulse. A modern, interactive web tool for real-time network diagnostics.">
+    <meta name="keywords" content="network test, ping test, latency, jitter, packet loss, network diagnostics, internet speed, connection quality, CDN speed test">
+    <meta name="author" content="NetPulse Diagnostic Lab">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://netpulse.app/">
+    <meta property="og:title" content="NetPulse - Network Latency & Quality Diagnostics">
+    <meta property="og:description" content="Test your network latency, jitter, packet loss, and overall quality with NetPulse. A modern, interactive web tool for real-time network diagnostics.">
+    <meta property="og:image" content="https://netpulse.app/og-image.jpg">
+    <meta property="og:site_name" content="NetPulse">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://netpulse.app/">
+    <meta name="twitter:title" content="NetPulse - Network Latency & Quality Diagnostics">
+    <meta name="twitter:description" content="Test your network latency, jitter, packet loss, and overall quality with NetPulse. A modern, interactive web tool for real-time network diagnostics.">
+    <meta name="twitter:image" content="https://netpulse.app/og-image.jpg">
+
+    <!-- Application Meta -->
+    <meta name="theme-color" content="#151824">
+    <link rel="canonical" href="https://netpulse.app/">
+
+    <!-- JSON-LD Structured Data for AI/Google Indexing -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "NetPulse",
+      "url": "https://netpulse.app/",
+      "description": "An advanced web tool for testing real-time network latency, jitter, packet loss, and comparing global CDN endpoints.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires a modern web browser with JavaScript and Fetch API support.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "NetPulse Diagnostic Lab"
+      }
+    }
+    </script>
+
     <!-- Vector Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300f2fe' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='22 12 18 12 15 21 9 3 6 12 2 12'/%3E%3C/svg%3E">
     <!-- Google Fonts -->
@@ -27,7 +76,7 @@
                 <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" class="logo-pulse-path"/>
                 </svg>
-                <span class="logo-text">Net<span class="gradient-text">Pulse</span></span>
+                <h1 class="logo-text">Net<span class="gradient-text">Pulse</span></h1>
             </div>
             <div class="status-indicator-bar" aria-live="polite">
                 <span class="status-dot green" id="global-status-dot"></span>
@@ -218,7 +267,7 @@
                         <div class="pulse-ring" id="pulse-ring-3"></div>
                         
                         <div class="gauge-display">
-                            <svg class="gauge-svg" width="220" height="220" viewBox="0 0 220 220">
+                            <svg class="gauge-svg" width="170" height="170" viewBox="0 0 220 220">
                                 <defs>
                                     <linearGradient id="gauge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                                         <stop offset="0%" stop-color="#00f2fe" />
@@ -306,45 +355,45 @@
                         <span class="chart-legend"><span class="legend-color red-dashed"></span> <span data-i18n="chart.legend.limit">Packet Timeout Limit (1.5s)</span></span>
                     </div>
                 </section>
-
-                <!-- Connection Quality Verdict -->
-                <section class="verdict-panel glass-card">
-                    <div class="panel-header">
-                        <div class="panel-title-wrapper">
-                            <svg class="header-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                <polyline points="22 4 12 14.01 9 11.01"/>
-                            </svg>
-                            <h2 data-i18n="check.title">Connection Quality Assessment</h2>
-                        </div>
-                    </div>
-                    <div class="verdict-body">
-                        <p class="verdict-summary" id="verdict-desc" data-i18n="verdict.default">Please complete a network diagnostic run to receive a tailored connection summary.</p>
-                        
-                        <div class="diagnostics-checklist">
-                            <div class="check-item pending" id="check-websockets">
-                                <span class="check-icon"></span>
-                                <span class="check-label" data-i18n="check.ws">WebSocket Capability & Latency</span>
-                                <span class="check-value" id="check-ws-value" data-i18n="check.waiting">Waiting...</span>
-                            </div>
-                            <div class="check-item pending" id="check-browsertype">
-                                <span class="check-icon"></span>
-                                <span class="check-label" data-i18n="check.downlink">Browser Downlink Estimate</span>
-                                <span class="check-value" id="check-browser-value" data-i18n="check.waiting">Waiting...</span>
-                            </div>
-                            <div class="check-item pending" id="check-dns-lookup">
-                                <span class="check-icon"></span>
-                                <span class="check-label" data-i18n="check.dns">Multi-Node DNS Comparison</span>
-                                <span class="check-value" id="check-dns-value" data-i18n="check.waiting">Waiting...</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </div>
         </div>
 
         <!-- Lower Section: Multi-Server CDN Comparison and History -->
         <div class="lower-grid">
+            <!-- Connection Quality Verdict -->
+            <section class="verdict-panel glass-card">
+                <div class="panel-header">
+                    <div class="panel-title-wrapper">
+                        <svg class="header-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <h2 data-i18n="check.title">Connection Quality Assessment</h2>
+                    </div>
+                </div>
+                <div class="verdict-body">
+                    <p class="verdict-summary" id="verdict-desc" data-i18n="verdict.default">Please complete a network diagnostic run to receive a tailored connection summary.</p>
+                    
+                    <div class="diagnostics-checklist">
+                        <div class="check-item pending" id="check-websockets">
+                            <span class="check-icon"></span>
+                            <span class="check-label" data-i18n="check.ws">WebSocket Capability & Latency</span>
+                            <span class="check-value" id="check-ws-value" data-i18n="check.waiting">Waiting...</span>
+                        </div>
+                        <div class="check-item pending" id="check-browsertype">
+                            <span class="check-icon"></span>
+                            <span class="check-label" data-i18n="check.downlink">Browser Downlink Estimate</span>
+                            <span class="check-value" id="check-browser-value" data-i18n="check.waiting">Waiting...</span>
+                        </div>
+                        <div class="check-item pending" id="check-dns-lookup">
+                            <span class="check-icon"></span>
+                            <span class="check-label" data-i18n="check.dns">Multi-Node DNS Comparison</span>
+                            <span class="check-value" id="check-dns-value" data-i18n="check.waiting">Waiting...</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- CDN Comparison Node Latency -->
             <section class="cdn-comparison glass-card">
                 <div class="panel-header">
@@ -389,40 +438,7 @@
                 </div>
             </section>
 
-            <!-- Test Session History -->
-            <section class="history-panel glass-card">
-                <div class="panel-header">
-                    <div class="panel-title-wrapper">
-                        <svg class="header-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <polyline points="12 6 12 12 16 14"/>
-                            <path d="M12 2a10 10 0 0 0-9.9 9H2"/>
-                        </svg>
-                        <h2 data-i18n="history.title">Diagnostic Run History</h2>
-                    </div>
-                    <button class="btn btn-sm btn-text" id="btn-clear-history" data-i18n="history.clear">Clear</button>
-                </div>
-                <div class="history-table-wrapper">
-                    <table class="history-table" id="history-table">
-                        <thead>
-                            <tr>
-                                <th data-i18n="history.col.date">Date & Time</th>
-                                <th data-i18n="history.col.server">Server</th>
-                                <th data-i18n="history.col.avg">Avg Latency</th>
-                                <th data-i18n="history.col.jitter">Jitter</th>
-                                <th data-i18n="history.col.loss">Loss</th>
-                                <th data-i18n="history.col.grade">Grade</th>
-                            </tr>
-                        </thead>
-                        <tbody id="history-tbody">
-                            <!-- Injected by JS -->
-                            <tr class="empty-state-row">
-                                <td colspan="6" class="text-center" data-i18n="history.empty">No runs recorded yet. Start a test to compile history.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+
         </div>
     </main>
 

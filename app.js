@@ -250,15 +250,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isTesting) {
             if (pingData.length === 0) {
                 globalStatusText.textContent = getTranslation('status.ready');
+                if (chartConnectionStatus) chartConnectionStatus.textContent = getTranslation('status.ready');
                 verdictDesc.textContent = getTranslation('verdict.default');
             } else {
                 updateStatistics(pingData);
+                if (chartConnectionStatus) chartConnectionStatus.textContent = getTranslation('status.ready');
             }
         } else {
             if (wasPausedByVisibility) {
                 globalStatusText.textContent = getTranslation('status.paused');
+                if (chartConnectionStatus) chartConnectionStatus.textContent = getTranslation('status.paused');
             } else {
                 globalStatusText.textContent = getTranslation('status.testing');
+                if (chartConnectionStatus) chartConnectionStatus.textContent = getTranslation('status.testing');
             }
         }
     }
@@ -316,11 +320,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('latency-chart');
     const chartConnectionStatus = document.getElementById('chart-connection-status');
 
-    // CDN comparison & History
+    // CDN comparison
     const btnRunCdn = document.getElementById('btn-run-cdn-comparison');
     const nodesList = document.getElementById('nodes-comparison-list');
-    const historyTbody = document.getElementById('history-tbody');
-    const btnClearHistory = document.getElementById('btn-clear-history');
 
     // Modals
     const aboutModal = document.getElementById('about-modal');
@@ -1066,7 +1068,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startTestBtn.querySelector('.btn-text').textContent = getTranslation('controls.stop');
         globalStatusDot.className = 'status-dot yellow';
         globalStatusText.textContent = getTranslation('status.testing');
-        chartConnectionStatus.textContent = getTranslation('cdn.testing');
+        chartConnectionStatus.textContent = getTranslation('status.testing');
         chartConnectionStatus.style.background = 'rgba(255, 179, 0, 0.1)';
         chartConnectionStatus.style.color = 'var(--status-warning)';
 
@@ -1214,9 +1216,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Compute final statistics
         updateStatistics(pingData);
-
-        // Save session history item
-        saveSessionToHistory();
     }
 
     // Toggle test button trigger
@@ -1437,93 +1436,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnRunCdn.addEventListener('click', runCdnComparison);
 
-    // Save current session to session storage / history Table
-    function saveSessionToHistory() {
-        // Exclude first 5 pings for history calculation, fallback to all pings if session is extremely short
-        const calculationData = pingData.length > 5 ? pingData.slice(5) : pingData;
-        if (calculationData.length === 0) return;
-
-        const successes = calculationData.filter(d => d.status === 'ok');
-        const avgVal = successes.length > 0 ? Math.round(successes.map(d => d.latency).reduce((a, b) => a+b) / successes.length) : '---';
-        const totalLoss = calculationData.filter(d => d.status === 'timeout').length;
-        const lossPct = Math.round((totalLoss / calculationData.length) * 100);
-
-        let jitter = 0;
-        if (successes.length > 1) {
-            let diffSum = 0;
-            for (let i = 1; i < successes.length; i++) {
-                diffSum += Math.abs(successes[i].latency - successes[i-1].latency);
-            }
-            jitter = Math.round(diffSum / (successes.length - 1));
-        }
-
-        const grade = statGrade.textContent;
-
-        const newRecord = {
-            id: Date.now(),
-            dateTime: new Date().toLocaleString(),
-            server: currentServerName,
-            avg: avgVal === '---' ? '---' : `${avgVal} ms`,
-            jitter: successes.length > 1 ? `${jitter} ms` : '---',
-            loss: `${lossPct}%`,
-            grade: grade
-        };
-
-        let currentHistory = JSON.parse(localStorage.getItem('np_history')) || [];
-        currentHistory.unshift(newRecord); // Prepend so newest is on top
-        
-        // Limit to last 20 entries
-        if (currentHistory.length > 20) {
-            currentHistory.length = 20;
-        }
-
-        localStorage.setItem('np_history', JSON.stringify(currentHistory));
-        renderHistoryTable();
-    }
-
-    // Render Local Storage history logs into HTML table
-    function renderHistoryTable() {
-        const currentHistory = JSON.parse(localStorage.getItem('np_history')) || [];
-        historyTbody.innerHTML = '';
-
-        if (currentHistory.length === 0) {
-            const emptyRow = document.createElement('tr');
-            emptyRow.className = 'empty-state-row';
-            emptyRow.innerHTML = `<td colspan="6" class="text-center" data-i18n="history.empty">${getTranslation('history.empty')}</td>`;
-            historyTbody.appendChild(emptyRow);
-            return;
-        }
-
-        currentHistory.forEach(item => {
-            const row = document.createElement('tr');
-            
-            // Set text color/styling on Grade
-            let gradeColor = 'var(--text-secondary)';
-            if (item.grade.startsWith('A')) gradeColor = 'var(--status-success)';
-            else if (item.grade === 'B') gradeColor = 'var(--accent-cyan)';
-            else if (item.grade === 'C') gradeColor = 'var(--accent-gold)';
-            else if (item.grade !== '--') gradeColor = 'var(--status-danger)';
-
-            row.innerHTML = `
-                <td>${item.dateTime}</td>
-                <td style="max-width: 140px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${item.server}</td>
-                <td><strong>${item.avg}</strong></td>
-                <td>${item.jitter}</td>
-                <td class="${item.loss !== '0%' ? 'text-red' : ''}">${item.loss}</td>
-                <td><span style="font-weight: 800; color: ${gradeColor}">${item.grade}</span></td>
-            `;
-            historyTbody.appendChild(row);
-        });
-    }
-
-    // Clear session history logs
-    btnClearHistory.addEventListener('click', () => {
-        if (confirm('Are you sure you want to clear your local diagnostics history?')) {
-            localStorage.removeItem('np_history');
-            renderHistoryTable();
-        }
-    });
-
     // Modals Control
     linkShowAbout.addEventListener('click', (e) => {
         e.preventDefault();
@@ -1579,9 +1491,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Compute final statistics
         updateStatistics(pingData);
 
-        // Save session history item
-        saveSessionToHistory();
-        
         alert('Continuous test auto-paused after 1,200 pings (~10 minutes) to conserve battery and network bandwidth.');
     }
 
@@ -1675,6 +1584,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Run-once initial setups
-    renderHistoryTable();
     renderCdnComparison(); // Renders nodes in empty state
 });

@@ -1189,7 +1189,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: 'cloudflare', name: 'Cloudflare Edge', url: 'https://cloudflare.com/cdn-cgi/trace' },
             { id: 'google', name: 'Google DNS API', url: 'https://dns.google' },
             { id: 'fastly', name: 'Fastly CDN Edge', url: 'https://fastly.com' },
-            { id: 'aws', name: 'Amazon AWS S3', url: 'https://s3.amazonaws.com' }
+            { id: 'aws', name: 'Amazon AWS Mumbai', url: 'https://s3.ap-south-1.amazonaws.com' }
         ];
 
         checkDnsLookup.className = 'check-item loading';
